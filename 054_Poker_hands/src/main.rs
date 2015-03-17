@@ -66,7 +66,7 @@ enum Hand {
 	RoyalFlush, //just StraightFlush(max)
 }
 
-fn parse_card ( card_str : &str ) -> Card {
+fn parse_single_card ( card_str : &str ) -> Card {
 	let face = match card_str.char_at(0) {
 		ch @ '2'...'9' => Face::Pip(ch.to_digit(10).unwrap() as u8),
 		'T' => Face::Pip(10),
@@ -86,9 +86,9 @@ fn parse_card ( card_str : &str ) -> Card {
 	Card{ suit : suit, face : face }
 }
 
-fn parse_mult_cards ( cards_str : &str ) -> Vec<Card> {
+fn parse_cards ( cards_str : &str ) -> Vec<Card> {
 	let mut cards = vec![];
-	for card in cards_str.words() { cards.push( parse_card(card) ) }
+	for card in cards_str.words() { cards.push( parse_single_card(card) ) }
 	cards.sort();
 	cards
 }
@@ -203,7 +203,7 @@ fn find_straight_and_flush ( hand : &Vec<Card> ) -> Vec<Hand> {
 }
 
 fn find_hands ( cards_str : &str ) -> Vec<Hand> {
-	let cards = parse_mult_cards(cards_str);
+	let cards = parse_cards(cards_str);
 	let mut hands = vec![];
 	
 	hands.push_all( &find_same_kinds_and_fullhouse(&cards)[..] );
@@ -230,7 +230,7 @@ fn main() {
 		let line = line.unwrap();
 		let hand1 = find_hands(&line[..15]);
 		let hand2 = find_hands(&line[15..]);
-		// hands are sorted
+		// hands are sorted and ordered
 		if hand1 > hand2 { player1_wins += 1 };
 	}
 	println!("{}", player1_wins);	
