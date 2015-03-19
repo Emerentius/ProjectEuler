@@ -1,10 +1,13 @@
 extern crate test;
 
+use std::iter::IteratorExt;
 use std::io;
 use std::io::prelude::*;
 use std::fs::File;
-use std::cmp::{Ord, Ordering};
-use std::cmp::max;
+use std::cmp::{Ord, Ordering, max, min};
+use Suit::*;
+use Face::*;
+use Hand::*;
 
 #[derive(Debug, Eq, PartialEq, Clone, Copy)]
 enum Suit {
@@ -26,11 +29,11 @@ enum Face {
 impl Face {
 	fn val(&self) -> u8 {
 		match *self {
-		Face::Pip(n) => n,
-		Face::Jack => 11,
-		Face::Queen => 12,
-		Face::King => 13,
-		Face::Ace => 14,
+			Pip(n) => n,
+			Jack => 11,
+			Queen => 12,
+			King => 13,
+			Ace => 14,
 		}
 	}
 }
@@ -53,10 +56,10 @@ impl PartialOrd for Card {
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone, Copy)]
-enum Hand {
+enum Hand { // Hand(highest_value_in_hand)
 	HighCard(u8),
 	Pair(u8),
-	TwoPairs(u8),
+	TwoPairs(u8,u8), // higher, lower
 	ThreeOfAKind(u8),
 	Straight(u8),
 	Flush(u8),
@@ -68,19 +71,19 @@ enum Hand {
 
 fn parse_single_card ( card_str : &str ) -> Card {
 	let face = match card_str.char_at(0) {
-		ch @ '2'...'9' => Face::Pip(ch.to_digit(10).unwrap() as u8),
-		'T' => Face::Pip(10),
-		'A' => Face::Ace,
-		'Q' => Face::Queen,
-		'K' => Face::King,
-		'J' => Face::Jack,
+		ch @ '2'...'9' => Pip(ch.to_digit(10).unwrap() as u8),
+		'T' => Pip(10),
+		'A' => Ace,
+		'Q' => Queen,
+		'K' => King,
+		'J' => Jack,
 		_   => unreachable!(),
 	};
 	let suit = match card_str.char_at(1) {
-		'S' => Suit::Spade,
-		'H' => Suit::Heart,
-		'D' => Suit::Diamond,
-		'C' => Suit::Club,
+		'S' => Spade,
+		'H' => Heart,
+		'D' => Diamond,
+		'C' => Club,
 		_ => unreachable!(),
 	};
 	Card{ suit : suit, face : face }
@@ -93,30 +96,30 @@ fn parse_cards ( cards_str : &str ) -> Vec<Card> {
 	cards
 }
 
-fn find_high_card ( cards: &Vec<Card>, hands : &Vec<Hand> ) -> Option<Hand> { 
+fn find_high_card ( cards: &Vec<Card>, hands : &Vec<Hand> ) -> Option<Hand> {
 	// find highest card that isn't part of some pattern
 	// sorted cards, unsorted hands
-	let mut taken_values = vec![];
+	let mut taken = vec![]; // values that are already part of a hand
 	for hand in hands {
 		match *hand {
-			Hand::HighCard(n) | Hand::Pair(n) | Hand::TwoPairs(n) | 
-			Hand::ThreeOfAKind(n) | Hand::Straight(n) | Hand::Flush(n) | 
-			Hand::FourOfAKind(n) | Hand::StraightFlush(n) => {
-				taken_values.push(n);
+			Pair(n) | ThreeOfAKind(n) | FourOfAKind(n) | Flush(n)  => {
+				taken.push(n);
+			}
+			TwoPairs(n,m) => {
+				taken.push_all(&[n,m])
+			}
+			Straight(_) | FullHouse(_,_) |
+			StraightFlush(_) | RoyalFlush => {
+				// All cards part of the hand already
+				return None;
 			},
-			Hand::FullHouse(n,m) => {
-				taken_values.push(n);
-				taken_values.push(m)
-			},
-			Hand::RoyalFlush => {},
-		}
+			HighCard(_) => unreachable!(),
+		};
 	}
-	for card in cards.iter().rev() {
-		if !taken_values.contains(&card.val()) {
-			return Some(Hand::HighCard( card.val() ));
-		}
-	}
-	None
+
+	let card = cards.iter().rev().find(|&c| !taken.contains( &(c.val() ) ) );
+	let val = card.unwrap().val();
+	Some( HighCard(val) )
 }
 
 fn find_same_kinds_and_fullhouse ( hand : &Vec<Card> ) -> Vec<Hand> {
@@ -124,107 +127,93 @@ fn find_same_kinds_and_fullhouse ( hand : &Vec<Card> ) -> Vec<Hand> {
 	let mut pairs = vec![];
 	let mut four_kind = vec![];
 	let mut three_kind = vec![];
-	
+
 	let vals_equal = |cards : &[Card], val : u8| {
-		for card in cards.iter() {
-			if card.val() != val { return false }
-		}
-		true
+		cards.iter().all(|&card| card.val() == val)
 	};
-	
-	'cards4: for cards in hand.windows(4) {
-		let value = cards[0].val();
-		if !vals_equal(cards, value) { continue 'cards4 }
-		four_kind.push( value )
-	}
-	'cards3: for cards in hand.windows(3) {
-		let value = cards[0].val();
-		if four_kind.contains( &value ) 
-		|| !vals_equal(cards, value) {
-			continue 'cards3
+	let not_taken = |val:u8, a:&Vec<_>, b: &Vec<_>| {
+		!a.contains(&val) && !b.contains(&val)
+	};
+
+	for pairing_size in (2..4+1).rev() {
+		for cards in hand.windows(pairing_size) {
+			let value = cards[0].val();
+			if not_taken(value, &pairs, &three_kind)
+			&& vals_equal(cards, value) {
+				match pairing_size {
+					4 => four_kind.push(value),
+					3 => three_kind.push(value),
+					2 => pairs.push(value),
+					_ => unreachable!(),
+				}
+			}
 		}
-		three_kind.push( value )
 	}
-	'cards2: for cards in hand.windows(2) {
-		let value = cards[0].val();
-		if four_kind.contains( &value )
-		|| three_kind.contains( &value )
-		|| !vals_equal(cards, value) {
-			continue 'cards2
-		}
-		pairs.push( value )
-	}
-	
+
 	let mut hands = vec![];
-	for &hand in &four_kind { hands.push( Hand::FourOfAKind(hand) ) }
-	for &hand in &three_kind { hands.push( Hand::ThreeOfAKind(hand) ) }
-	
-	if pairs.len() == 2 {
-		hands.push(Hand::TwoPairs( max(pairs[0], pairs[1]) ) );
-		pairs.drain(); // no two Pair entries in addition to one TwoPair entry
-	};
+
+	// draining to prevent double dipping
 	if pairs.len() == 1 && three_kind.len() == 1 {
-		hands.push( Hand::FullHouse(three_kind[0], pairs[0]) );
-		pairs.drain(); // no extra single pair entry
-	}
-	for &hand in &pairs { hands.push( Hand::Pair(hand) ) }
-	
+		hands.push( FullHouse(three_kind[0], pairs[0]) );
+		pairs.drain();
+		three_kind.drain();
+	} else if pairs.len() == 2 {
+		let high_val = max(pairs[0], pairs[1]);
+		let low_val = min(pairs[0], pairs[1]);
+		hands.push( TwoPairs( high_val, low_val ) );
+		pairs.drain();
+	};
+
+	for &val in &four_kind { hands.push( FourOfAKind(val) ) }
+	for &val in &three_kind { hands.push( ThreeOfAKind(val) ) }
+	for &val in &pairs { hands.push( Pair(val) ) }
+
 	hands
 }
 
 fn find_straight_and_flush ( hand : &Vec<Card> ) -> Vec<Hand> {
 	let mut hands = vec![];
-	let mut is_straight = true;
-	let mut is_flush = true;
-	
-	// straight
-	for cards in hand.windows(2) {
-	if let [card, following_card] = cards {
-		if card.val() + 1 != following_card.val() { is_straight = false; }
-	}}
-	
-	// flush
-	let suit = hand[0].suit;
-	for card in hand.iter() {
-		if card.suit != suit { is_flush = false; }
-	}
-	
+
+	let is_flush = hand.iter().all(|&card| card.suit != hand[0].suit);
+	let is_straight = hand.iter().enumerate().all(|(i, &card)| {
+		card.val() == hand[0].val() + i as u8
+	});
+
 	// push hands
 	let val = hand[4].val();
-	if is_flush && is_straight {
-		if val == Face::Ace.val() { hands.push( Hand::RoyalFlush ) }
-		else { hands.push( Hand::StraightFlush(val) ) }
-	} else if is_straight {
-		hands.push( Hand::Straight(val) ) 
-	} else if is_flush {
-		hands.push( Hand::Flush(val) )
-	}
-	hands	
+	match (is_flush, is_straight) {
+		(true, true) if val == Ace.val() => hands.push( RoyalFlush ),
+		(true, true) => hands.push( StraightFlush(val) ),
+		(false, true) => hands.push( Straight(val) ),
+		(true, false) => hands.push( Flush(val) ),
+		(false, false) => (),
+	};
+	hands
 }
 
 fn find_hands ( cards_str : &str ) -> Vec<Hand> {
 	let cards = parse_cards(cards_str);
 	let mut hands = vec![];
-	
+
 	hands.push_all( &find_same_kinds_and_fullhouse(&cards)[..] );
 	hands.push_all( &find_straight_and_flush( &cards ) );
-	
+
 	if let Some(hand) = find_high_card(&cards, &hands) {
 		hands.push( hand );
 	}
 	// reverse sort, high to low
-	hands.sort_by(|a,b| b.cmp(a));	
+	hands.sort_by(|a,b| b.cmp(a));
 	hands
 }
 
 fn main() {
 	let path = Path::new(r"D:\Code\Project Euler\054_Poker_hands\target\p054_poker.txt");
-	let mut file_handle = match File::open(&path) {
+	let file_handle = match File::open(&path) {
                 Err(why) => panic!("couldn't open {}: {}", path.display(), why.description()),
 		Ok(file) => file,
 	};
-	let mut file = io::BufReader::new(file_handle);
-	
+	let file = io::BufReader::new(file_handle);
+
 	let mut player1_wins = 0;
 	for line in file.lines() {
 		let line = line.unwrap();
@@ -233,7 +222,7 @@ fn main() {
 		// hands are sorted and ordered
 		if hand1 > hand2 { player1_wins += 1 };
 	}
-	println!("{}", player1_wins);	
+	println!("{}", player1_wins);
 }
 
 #[bench]
