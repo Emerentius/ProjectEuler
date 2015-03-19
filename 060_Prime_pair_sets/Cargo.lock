@@ -1,0 +1,11 @@
+[root]
+name = "060_Prime_pair_sets"
+version = "0.0.1"
+dependencies = [
+ "prime 0.0.1",
+]
+
+[[package]]
+name = "prime"
+version = "0.0.1"
+
