@@ -1,0 +1,11 @@
+[root]
+name = "347_Largest_integer_divisible_by_two_primes"
+version = "0.0.1"
+dependencies = [
+ "prime 0.0.1",
+]
+
+[[package]]
+name = "prime"
+version = "0.0.1"
+
