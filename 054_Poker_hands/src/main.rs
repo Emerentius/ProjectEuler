@@ -1,9 +1,8 @@
+#![feature(collections)]
+#![feature(test)]
+#![feature(str_char)]
 extern crate test;
 
-use std::iter::IteratorExt;
-use std::io;
-use std::io::prelude::*;
-use std::fs::File;
 use std::cmp::{Ord, Ordering, max, min};
 use Suit::*;
 use Face::*;
@@ -91,7 +90,9 @@ fn parse_single_card ( card_str : &str ) -> Card {
 
 fn parse_cards ( cards_str : &str ) -> Vec<Card> {
 	let mut cards = vec![];
-	for card in cards_str.words() { cards.push( parse_single_card(card) ) }
+	for card in cards_str.trim().split(' ') {
+		cards.push( parse_single_card(card) );
+	}
 	cards.sort();
 	cards
 }
@@ -194,7 +195,6 @@ fn find_straight_and_flush ( hand : &Vec<Card> ) -> Vec<Hand> {
 fn find_hands ( cards_str : &str ) -> Vec<Hand> {
 	let cards = parse_cards(cards_str);
 	let mut hands = vec![];
-
 	hands.push_all( &find_same_kinds_and_fullhouse(&cards)[..] );
 	hands.push_all( &find_straight_and_flush( &cards ) );
 
@@ -207,16 +207,18 @@ fn find_hands ( cards_str : &str ) -> Vec<Hand> {
 }
 
 fn main() {
-	let path = Path::new(r"D:\Code\Project Euler\054_Poker_hands\target\p054_poker.txt");
+	let games = include_str!("p054_poker.txt");
+	/*let path = Path::new(r"D:\Code\Project Euler\054_Poker_hands\target\p054_poker.txt");
 	let file_handle = match File::open(&path) {
                 Err(why) => panic!("couldn't open {}: {}", path.display(), why.description()),
 		Ok(file) => file,
 	};
-	let file = io::BufReader::new(file_handle);
+	let file = io::BufReader::new(file_handle);*/
 
 	let mut player1_wins = 0;
-	for line in file.lines() {
-		let line = line.unwrap();
+	for line in games.lines() {
+
+		//let line = line//.unwrap();
 		let hand1 = find_hands(&line[..15]);
 		let hand2 = find_hands(&line[15..]);
 		// hands are sorted and ordered
@@ -230,7 +232,7 @@ fn entire_program( b: &mut test::Bencher) {
 	b.iter(|| main() );
 }
 
-#[bench]
+/*#[bench]
 fn without_file_io( b: &mut test::Bencher) {
 	let path = Path::new(r"D:\Code\Project Euler\054_Poker_hands\target\p054_poker.txt");
 	let mut file_handle = match File::open(&path) {
@@ -248,4 +250,4 @@ fn without_file_io( b: &mut test::Bencher) {
 			if hand1 > hand2 { player1_wins += 1 };
 		}
 	})
-}
+}*/
