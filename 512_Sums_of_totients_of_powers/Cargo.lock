@@ -1,0 +1,11 @@
+[root]
+name = "512_Sums_of_totients_of_powers"
+version = "0.1.0"
+dependencies = [
+ "prime 0.0.1",
+]
+
+[[package]]
+name = "prime"
+version = "0.0.1"
+

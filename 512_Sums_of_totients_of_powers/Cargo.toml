@@ -1,0 +1,7 @@
+[package]
+name = "512_Sums_of_totients_of_powers"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+path = "../../libraries/prime"
