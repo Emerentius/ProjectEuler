@@ -1,6 +1,8 @@
 #![feature(test)]
 extern crate test;
 
+use std::io::Write;
+use std::fs::File;
 use std::fmt::Display;
 use std::ops::{Index, IndexMut};
 
@@ -22,6 +24,12 @@ impl Display for Grid {
 			if (row + 1) % 3 == 0 { try!( write!(f, "\n") ) };
 		}
 		Ok(())
+	}
+}
+
+impl Clone for Grid {
+	fn clone(&self) -> Self {
+		Grid::new(&self.grid).unwrap()
 	}
 }
 
@@ -124,27 +132,11 @@ fn sudoku_solver(grid: &mut Grid, cell_nr: usize) -> bool {
 	false
 }
 
-fn sudoku_solver2(mut grid: Grid, cell_nr: usize) -> Option<Grid> {
-	if cell_nr == 81 { return Some(grid) } // base case
-	if grid[cell_nr] != 0 { return sudoku_solver2(grid, cell_nr+1) }
-
-	for i in 1..9+1 {
-		grid[cell_nr] = i;
-		if grid.change_valid(cell_nr) {
-			let gr2 = sudoku_solver2( Grid::new(&grid.grid).unwrap(), cell_nr+1);
-			if gr2.is_some() { return gr2 } // base case hand through
-		}
-	}
-	//grid[cell_nr] = 0; // return to previous state
-	None
-}
-
 fn main() {
 	let mut cache = vec![];
 	let sudokus_string = include_str!("p096_sudoku.txt");
 	let mut lines_iter = sudokus_string.lines()
 		.filter(|line| !line.starts_with("Grid"));
-
 
 	let mut sudokus = vec![];
 	for _ in 1..50+1 {
@@ -155,22 +147,56 @@ fn main() {
 		{
 			cache.push(num);
 		}
-		sudokus.push(
-			sudoku_solver2(
-				Grid::new(&cache).unwrap(),
-				0
-			).unwrap()
-		);
+		sudokus.push(Grid::new(&cache).unwrap());
 		cache.clear();
 	}
 
+	//let unsolved_sudokus = sudokus.clone();
+
 	let mut sum = 0;
-	for sudoku in &sudokus {
-		//sudoku_solver(sudoku, 0);
+	for sudoku in &mut sudokus {
+		sudoku_solver(sudoku, 0);
 		sum += sudoku[0] * 100 + sudoku[1] * 10 + sudoku[2] ;
 	}
 
 	println!("{}", sum);
+
+	// write sudokus to file
+	/*
+	let mut file = File::create("./unsolved_and_solved_sudokus.txt").unwrap();
+
+	for (i, (unsolved, solved)) in unsolved_sudokus.iter()
+		.zip( sudokus.iter() )
+		.enumerate()
+	{
+		writeln!(&mut file, "{:^36}", format!("Grid {:2}", i+1) );
+
+		for row in 0..9 {
+			for col_off in (0..3).map(|z| 3*z) {
+				write!(&mut file, "{}{}{} ",
+						unsolved[(row, 0+col_off)],
+						unsolved[(row, 1+col_off)],
+						unsolved[(row, 2+col_off)]
+				);
+			}
+
+			write!(&mut file, "\t");
+			if row == 4 { write!(file, "=>"); }
+			write!(&mut file, "\t");
+
+			for col_off in (0..3).map(|z| 3*z) {
+				write!(&mut file, "{}{}{} ",
+						solved[(row, 0+col_off)],
+						solved[(row, 1+col_off)],
+						solved[(row, 2+col_off)]
+				);
+			}
+
+			write!(&mut file, "\n");
+			if (row + 1) % 3 == 0 { write!(&mut file, "\n"); };
+		}
+	}
+	*/
 }
 
 #[bench]
