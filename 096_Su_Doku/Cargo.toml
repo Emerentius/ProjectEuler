@@ -1,0 +1,7 @@
+[package]
+
+name = "096_su_doku"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.itertools]
