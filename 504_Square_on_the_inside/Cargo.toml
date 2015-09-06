@@ -1,0 +1,6 @@
+[package]
+name = "504_Square_on_the_inside"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.num]
