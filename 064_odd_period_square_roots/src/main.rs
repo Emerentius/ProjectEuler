@@ -46,29 +46,11 @@ impl Iterator for ContFract {
     }
 }
 
-fn continued_fraction_sqrt(num: u16) -> Vec<u16> {
-    let mut m = 0;
-    let mut d = 1;
-    let a_0 = (num as f32).sqrt() as u16;
-    let mut a = a_0;
-    let mut cont_frac = vec![a_0];
-
-    while a != 2*a_0 {
-        m = d*a - m;
-        d = (num - m*m)/d;
-        a = (a_0 + m)/d;
-        cont_frac.push(a);
-    }
-
-    cont_frac
-}
-
 fn main() {
     let squares: BTreeSet<u16> = (1..100+1).map(|x| x*x).collect();
 
     println!("{}",
         (1..10_000+1).filter(|n| !squares.contains(n))
-            //.filter(|&n| (continued_fraction_sqrt(n).len() - 1) % 2 == 1)
             .filter(|&n| (ContFract::new(n).count() - 1) % 2 == 1)
             .count()
     )
