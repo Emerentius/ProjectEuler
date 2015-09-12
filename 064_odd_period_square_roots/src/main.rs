@@ -30,14 +30,14 @@ impl Iterator for ContFract {
     type Item = u16;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.fin { return None }
-
-        let old = self.a;
-
+        if self.fin {
+            return None
+        }
         if self.a == 2*self.a_0 {
-            self.fin = true;
+            self.fin = true
         }
 
+        let old = self.a;
         self.m = self.d * self.a - self.m;
         self.d = (self.num - self.m * self.m)/self.d;
         self.a = (self.a_0 + self.m) / self.d;
