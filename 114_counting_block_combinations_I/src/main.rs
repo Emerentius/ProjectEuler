@@ -47,30 +47,11 @@ impl FnMut<(u64,)> for CombinationCounter {
     }
 }
 
-// pos starting at 0
-fn count_block_combinations(pos: u64) -> u64 {
-    match pos {
-        ROW_LEN_PLUS => 1,
-        0...ROW_LEN => {
-            let mut sum = 0;
-
-            // empty block
-            sum += count_block_combinations(pos + 1);
-            for block_len in (MIN_BLOCK_LEN..ROW_LEN-pos+1) {
-                sum += count_block_combinations(pos + block_len + 1);
-            }
-            sum
-        }
-        _ => 0,
-    }
-}
-
 fn main() {
-    let mut counter = CombinationCounter {
+    let mut count_block_combinations = CombinationCounter {
         memoized_values: BTreeMap::new()
     };
-    println!("{}", counter(0));
-    //println!("{}", count_block_combinations(0));
+    println!("{}", count_block_combinations(0));
 }
 
 #[bench]
