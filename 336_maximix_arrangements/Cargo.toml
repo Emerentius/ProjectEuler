@@ -1,0 +1,8 @@
+[package]
+name = "336_maximix_arrangements"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.euler_tools]
+path = "../../libraries/euler_tools"
+version = "0.1"

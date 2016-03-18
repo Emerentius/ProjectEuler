@@ -1,0 +1,11 @@
+[root]
+name = "336_maximix_arrangements"
+version = "0.1.0"
+dependencies = [
+ "euler_tools 0.1.0",
+]
+
+[[package]]
+name = "euler_tools"
+version = "0.1.0"
+
