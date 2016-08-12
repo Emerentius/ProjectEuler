@@ -1,6 +1,4 @@
-#![feature(collections)]
 #![feature(test)]
-#![feature(str_char)]
 extern crate test;
 
 use std::cmp::{Ord, Ordering, max, min};
@@ -9,21 +7,28 @@ use Face::*;
 use Hand::*;
 
 #[derive(Debug, Eq, PartialEq, Clone, Copy)]
-enum Suit {
-	Spade,
-	Club,
-	Diamond,
-	Heart,
+enum Suit { Spade, Club, Diamond, Heart, }
+
+#[allow(dead_code)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Copy)]
+enum FaceF {
+	Two     = 2,
+	Three   = 3,
+	Four    = 4,
+	Five    = 5,
+	Six     = 6,
+	Seven   = 7,
+	Eight   = 8,
+	Nine    = 9,
+	Ten     = 10,
+	Jack    = 11,
+	Queen   = 12,
+	King    = 13,
+	Ace     = 14,
 }
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Copy)]
-enum Face {
-	Pip(u8),
-	Jack,
-	Queen,
-	King,
-	Ace,
-}
+enum Face { Pip(u8), Jack, Queen, King, Ace, }
 
 impl Face {
 	fn val(&self) -> u8 {
@@ -69,7 +74,8 @@ enum Hand { // Hand(highest_value_in_hand)
 }
 
 fn parse_single_card ( card_str : &str ) -> Card {
-	let face = match card_str.char_at(0) {
+	let mut chars = card_str.chars();
+	let face = match chars.next().unwrap() {
 		ch @ '2'...'9' => Pip(ch.to_digit(10).unwrap() as u8),
 		'T' => Pip(10),
 		'A' => Ace,
@@ -78,7 +84,7 @@ fn parse_single_card ( card_str : &str ) -> Card {
 		'J' => Jack,
 		_   => unreachable!(),
 	};
-	let suit = match card_str.char_at(1) {
+	let suit = match chars.next().unwrap() {
 		'S' => Spade,
 		'H' => Heart,
 		'D' => Diamond,
@@ -107,7 +113,7 @@ fn find_high_card ( cards: &Vec<Card>, hands : &Vec<Hand> ) -> Option<Hand> {
 				taken.push(n);
 			}
 			TwoPairs(n,m) => {
-				taken.push_all(&[n,m])
+				taken.extend(&[n,m])
 			}
 			Straight(_) | FullHouse(_,_) |
 			StraightFlush(_) | RoyalFlush => {
@@ -156,18 +162,18 @@ fn find_same_kinds_and_fullhouse ( hand : &Vec<Card> ) -> Vec<Hand> {
 	// draining to prevent double dipping
 	if pairs.len() == 1 && three_kind.len() == 1 {
 		hands.push( FullHouse(three_kind[0], pairs[0]) );
-		pairs.drain();
-		three_kind.drain();
+		pairs.clear();
+		three_kind.clear();
 	} else if pairs.len() == 2 {
 		let high_val = max(pairs[0], pairs[1]);
 		let low_val = min(pairs[0], pairs[1]);
 		hands.push( TwoPairs( high_val, low_val ) );
-		pairs.drain();
+		pairs.clear();
 	};
 
-	for &val in &four_kind { hands.push( FourOfAKind(val) ) }
+	for &val in &four_kind  { hands.push( FourOfAKind(val) ) }
 	for &val in &three_kind { hands.push( ThreeOfAKind(val) ) }
-	for &val in &pairs { hands.push( Pair(val) ) }
+	for &val in &pairs      { hands.push( Pair(val) ) }
 
 	hands
 }
@@ -195,8 +201,8 @@ fn find_straight_and_flush ( hand : &Vec<Card> ) -> Vec<Hand> {
 fn find_hands ( cards_str : &str ) -> Vec<Hand> {
 	let cards = parse_cards(cards_str);
 	let mut hands = vec![];
-	hands.push_all( &find_same_kinds_and_fullhouse(&cards)[..] );
-	hands.push_all( &find_straight_and_flush( &cards ) );
+	hands.extend( &find_same_kinds_and_fullhouse(&cards)[..] );
+	hands.extend( &find_straight_and_flush( &cards ) );
 
 	if let Some(hand) = find_high_card(&cards, &hands) {
 		hands.push( hand );
@@ -208,46 +214,19 @@ fn find_hands ( cards_str : &str ) -> Vec<Hand> {
 
 fn main() {
 	let games = include_str!("p054_poker.txt");
-	/*let path = Path::new(r"D:\Code\Project Euler\054_Poker_hands\target\p054_poker.txt");
-	let file_handle = match File::open(&path) {
-                Err(why) => panic!("couldn't open {}: {}", path.display(), why.description()),
-		Ok(file) => file,
-	};
-	let file = io::BufReader::new(file_handle);*/
-
 	let mut player1_wins = 0;
 	for line in games.lines() {
-
-		//let line = line//.unwrap();
 		let hand1 = find_hands(&line[..15]);
 		let hand2 = find_hands(&line[15..]);
 		// hands are sorted and ordered
 		if hand1 > hand2 { player1_wins += 1 };
 	}
 	println!("{}", player1_wins);
+	//let a: i32 = FaceF::Three as i32;
+	//println!("{}", a as FaceF);
 }
 
 #[bench]
 fn entire_program( b: &mut test::Bencher) {
 	b.iter(|| main() );
 }
-
-/*#[bench]
-fn without_file_io( b: &mut test::Bencher) {
-	let path = Path::new(r"D:\Code\Project Euler\054_Poker_hands\target\p054_poker.txt");
-	let mut file_handle = match File::open(&path) {
-                Err(why) => panic!("couldn't open {}: {}", path.display(), why.description()),
-		Ok(file) => file,
-	};
-	let mut string = String::new();
-	file_handle.read_to_string(&mut string);
-	b.iter(|| {
-		let mut player1_wins = 0;
-		for line in string.lines() {
-			let hand1 = find_hands(&line[..15]);
-			let hand2 = find_hands(&line[15..]);
-			// hands are sorted
-			if hand1 > hand2 { player1_wins += 1 };
-		}
-	})
-}*/
