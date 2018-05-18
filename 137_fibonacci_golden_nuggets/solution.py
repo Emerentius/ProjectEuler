@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Formula for F(x) = Sum_1.. (x^n * f(n)), where f(n) are fibonacci coefficients, f(1) = f(2) = 1
 # F(x) = x / (1 - x - x²)
 #      = ab / (b²-ab-a²), with x = a/b
@@ -27,6 +28,6 @@ while len(sols) < 15:
     a = int(a2**0.5)
     if a*a == a2:
         sols.append(n)
-        print(n, a2/4/n/n)
+        print(f'n = {n:20}, x = {(a2/4/n/n)**0.5 - (n+1)/2/n}')
 
         n = int(n * 6.8541) - 2
