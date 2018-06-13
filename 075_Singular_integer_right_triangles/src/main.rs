@@ -1,4 +1,5 @@
 #![feature(test)]
+#![feature(iterator_step_by)]
 extern crate test;
 extern crate num;
 use num::integer::Integer;
@@ -8,8 +9,7 @@ fn main() {
     let mut n_triangles : Vec<u8> = vec![0;limit+1];
     for m in 2.. {
         if 2*m*(m+1) > limit { break } // perimeter > limit, always
-        let mut n = 1 + m % 2;
-        while n < m { // for n in (1+ m%2 .. m).step_by(2)   <-- unstable rust
+        for n in (1+ m%2 .. m).step_by(2) {
             let a = m*m - n*n;
             let b = 2*m*n;
             if a.gcd(&b) == 1 {
@@ -22,7 +22,6 @@ fn main() {
                     perimeter_tmp += perimeter;
                 }
             }
-            n += 2;
         }
     }
     let count = n_triangles.into_iter().filter(|&n| n == 1).count();
