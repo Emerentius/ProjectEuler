@@ -36,24 +36,24 @@ fn find_prime_occurences (number : i64, prime:&u64) -> (i64, i64) {
 fn main() {
 	// calculate prime numbers, upper end just a guess
 	let max_prime = 2000000;
-	let mut prime_numbers = primes_up_to(max_prime);
+	let prime_numbers = primes_up_to(max_prime);
 
 	// calculate factors for triangle numbers and factorize them
 	// triangle numbers = n*(n+1) / 2
 	for n in 1.. {
 		// assignment depending on which factor is even, n or (n+1)
-		let (mut a, mut b) = (0,0);
+		let (mut a, mut b);
 		if n % 2 == 0	{
 			a = n/2;
 			b = n+1;
 		} else {
 			a = n;
-			b = ((n+1)/2);
+			b = (n+1)/2;
 		}
 
 		let (mut prime_a, mut prime_b) = (vec![], vec![]);
 		let (mut temp_a, mut temp_b) = (a,b);
-		let mut occ = 0;
+		let mut occ;
 
 		// factorize a and b by trial division
 		for prime in prime_numbers.iter() {
