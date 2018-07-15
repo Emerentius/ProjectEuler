@@ -8,7 +8,7 @@ fn prop_sum (nr : i32) -> i32 {
 
 fn main() {
 	// find abundant numbers
-	let mut abundant_numbers = vec::<i32>![];
+	let mut abundant_numbers = vec![];
 	for i in 1..28123+1 { if prop_sum(i) > i { abundant_numbers.push(i) } }
 
 	println!("{} abundant numbers found.", abundant_numbers.len());
