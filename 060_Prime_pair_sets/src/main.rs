@@ -2,6 +2,15 @@ extern crate prime;
 use std::collections::{HashMap, HashSet};
 use std::cmp::min;
 
+fn length(mut num: u64) -> u32 {
+    let mut len = 0;
+    while num != 0 {
+        len += 1;
+        num /= 10;
+    }
+    len as u32
+}
+
 fn main() {
     let primes = prime::sieve(30_000);
     let mut concatenable = HashMap::new();
@@ -12,11 +21,8 @@ fn main() {
         for (j, &prime2) in primes.iter().enumerate() {
             if i % 100 == 0 && j % 10_000 == 0 { println!("{:?}", (i,j)) };
 
-            let mut str1 = prime1.to_string();
-            let str2 = prime2.to_string();
-            str1.push_str(&str2);
-            let concat_num = str1.parse::<u64>().unwrap();
-            if prime::is_prime(concat_num, &primes) {
+            let concat_num = prime1 * 10u64.pow( length(prime2) ) + prime2;
+            if prime::is_prime(concat_num) {
                 concats.insert(prime2);
             }
         }
