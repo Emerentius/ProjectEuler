@@ -11,7 +11,7 @@ fn main() {
 	let mut longest_chain_startpoint = 0;
 	// RangeStep unstable language feature
 	// iterate over all uneven numbers
-	for n in std::iter::range_step(1,1000000, 2) {
+	for n in (1..1000000).step_by(2) {
 		let steps = collatz_steps(n, 1).1; // output (1, steps)
 		if steps > max_collatz_steps {
 			max_collatz_steps = steps;
