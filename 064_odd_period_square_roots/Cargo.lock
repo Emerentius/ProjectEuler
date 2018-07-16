@@ -1,4 +1,4 @@
-[root]
+[[package]]
 name = "064_odd_period_square_roots"
 version = "0.1.0"
 

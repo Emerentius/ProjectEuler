@@ -2,56 +2,30 @@
 extern crate test;
 use std::collections::BTreeSet;
 
-// Periodic continued fractions only
-struct ContFract {
-    m:   u16,
-    d:   u16,
-    a_0: u16,
-    a:   u16,
-    num: u16,
-    fin: bool,
-}
+fn cont_fraction_len(num: u16) -> usize {
+    let mut m = 0;
+    let mut d = 1;
+    let a_0 = (num as f32).sqrt() as u16;
+    let mut a = a_0;
+    let mut n_frac = 1;
 
-impl ContFract {
-    fn new(num: u16) -> ContFract {
-        let a_0 = (num as f32).sqrt() as u16;
-        ContFract {
-            m: 0,
-            d: 1,
-            a_0: a_0,
-            a: a_0,
-            num: num,
-            fin: false,
-        }
+    while a != 2*a_0 {
+        m = d*a - m;
+        d = (num - m*m)/d;
+        a = (a_0 + m)/d;
+        n_frac += 1;
     }
-}
-
-impl Iterator for ContFract {
-    type Item = u16;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        if self.fin {
-            return None
-        }
-        if self.a == 2*self.a_0 {
-            self.fin = true
-        }
-
-        let old = self.a;
-        self.m = self.d * self.a - self.m;
-        self.d = (self.num - self.m * self.m)/self.d;
-        self.a = (self.a_0 + self.m) / self.d;
-
-        Some(old)
-    }
+    n_frac
 }
 
 fn main() {
     let squares: BTreeSet<u16> = (1..100+1).map(|x| x*x).collect();
 
     println!("{}",
-        (1..10_000+1).filter(|n| !squares.contains(n))
-            .filter(|&n| (ContFract::new(n).count() - 1) % 2 == 1)
+        (1..10_000+1)
+            .filter(|n| (n-1)%4 == 0 || (n-2)%4 == 0 ) // fast square pre-check
+            .filter(|n| !squares.contains(n))
+            .filter(|&n| (cont_fraction_len(n) - 1) % 2 == 1)
             .count()
     )
 }
