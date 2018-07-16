@@ -1,0 +1,4 @@
+40 steps down, 20 to the right, 20 down
+40! permutations total, but order of right or down steps within their own
+direction group doesn't matter
+solution: 40! / (20! ^ 2)
