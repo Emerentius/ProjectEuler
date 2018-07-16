@@ -1,0 +1,5 @@
+[package]
+
+name = "002_Even_Fibonaci_numbers"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
