@@ -1,8 +1,8 @@
 #![feature(test)]
-#![feature(step_by)]
-#![feature(iter_arith)]
+#![feature(step_by)] // for .step_by()
+#![feature(iter_arith)] // for .sum()
 extern crate test;
-extern crate prime;
+extern crate prime; // my prime library
 
 const N: u32 = 500_000_000;
 
