@@ -1,5 +1,5 @@
 #![feature(test)]
-#![feature(unboxed_closures)]
+#![feature(unboxed_closures, fn_traits)]
 #![feature(core)]
 extern crate test;
 use std::collections::BTreeMap;
@@ -35,7 +35,7 @@ impl FnMut<(u64,)> for CombinationCounter {
 
                 // empty block
                 sum += (self)(pos + 1);
-                for block_len in (MIN_BLOCK_LEN..ROW_LEN-pos+1) {
+                for block_len in MIN_BLOCK_LEN..ROW_LEN-pos+1 {
                     sum += (self)(pos + block_len + 1);
                 }
 
