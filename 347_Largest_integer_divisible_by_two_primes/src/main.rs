@@ -1,40 +1,50 @@
-extern crate prime;
-use std::num::Int;
+#![feature(test)]
+extern crate test;
+extern crate primal;
+
+fn M(prime1: usize, prime2: usize, target: usize) -> usize {
+    let mut max_num = 0;
+    let mut num = prime1*prime2;
+    if num > target { return 0 } // impossible
+
+    // calc p1*p2^(max_exp2) <= target with maximum exp2
+    let mut exp2 = 1;
+    while num*prime2 <= target {
+        num *= prime2;
+        exp2 += 1;
+    }
+
+    // divide by prime2 repeatedly, correct as much as possible with prime1 at every step
+    loop {
+        if num > max_num { max_num = num }
+        num /= prime2;
+        exp2 -= 1;
+        if exp2 == 0 { break }
+        while num*prime1 <= target { num *= prime1 }
+    }
+
+    max_num
+}
 
 fn main() {
-    let primes = prime::sieve(10_000_000/2);
-    let log_target = 7.;
-    let target = 10_000_000; //.pow(7);
+    let target = 10_000_000;
+    let primes = primal::Primes::all()
+        .take_while(|&pr| pr < target/2)
+        .collect::<Vec<_>>();
 
     let mut sum = 0;
     for (i,&prime1) in primes.iter().enumerate() {
-        if i % 10_000 == 0 { println!("{}: {}", i, prime1) }
-        //let log1 = (prime1 as f64).log10();
         for &prime2 in &primes[..i] {
-            //let mut max_num = 0.;
-            let mut max_num = 0;
-            let log2 = (prime2 as f64).log10();
-            //let (mut co1, mut co2) = (0, (log_target/log2) as u64 + 1);
-            let (mut co1, mut co2) = (0, (log_target/log2) as u64 + 1 );
-
-            'c1: for c1 in (1..).take_while(|&c| c*prime1 <= target )  {//(c as f64)*log1 <= log_target) {
-                'c2: for c2 in (1..co2).rev() {
-                    //let num = (c1 as f64)*log1 + (c2 as f64)*log2;
-                    let num = prime1.pow(c1 as u32) + prime2.pow(c2 as u);
-                    //if num > log_target { continue }
-                    if num > target { continue }
-                    if num > max_num {
-                        //println!("{}", num);
-                        max_num = num;
-                        co1 = c1;
-                        co2 = c2;
-                    }
-                    //if num < log_target { continue 'c1 }
-                    if num < target { continue 'c1 }
-                }
+            match M(prime1, prime2, target) {
+                0 => break,
+                m @ _ => sum += m,
             }
-            sum += co1*prime1 + co2*prime2;
         }
     }
     println!("{}", sum);
+}
+
+#[bench]
+fn bench (b: &mut test::Bencher) {
+    b.iter(|| main())
 }
