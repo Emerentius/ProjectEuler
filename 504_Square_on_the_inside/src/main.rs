@@ -13,20 +13,19 @@ fn points_inside (h:usize, w: usize) -> usize {
 fn main() {
     const m : usize = 100;
 
-    let squares : BTreeSet<_> = (1..142).map(|n| n*n).collect();
+    let squares: BTreeSet<_> = (1..142).map(|n| n*n).collect();
     let is_square = |num| {
         match num % 16 {
-            0 | 1 | 4 | 9 => (),
-            _ => return false,
-        };
-        squares.contains(&num)
+            0 | 1 | 4 | 9 => squares.contains(&num),
+            _ => false,
+        }
     };
 
-    let mut points = vec![];
-    for i in 0..m+1 {
-        let points_inner : Vec<_> = (0..m+1).map(|j| points_inside(i,j) )
-            .collect();
-        points.push(points_inner);
+    let mut points = [[0;101]; 101];
+    for (i, inner) in points.iter_mut().enumerate() {
+        for (j, entry) in inner.iter_mut().enumerate() {
+            *entry = points_inside(i,j);
+        }
     }
 
     let mut counter = 0;
