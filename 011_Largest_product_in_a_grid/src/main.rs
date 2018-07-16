@@ -10,7 +10,7 @@ fn max (a:i32, b:i32) -> i32 { if a>b { a } else { b } }
 fn line_product(array : &[[i32;20];20], column : usize, line : usize,  dir : &Direction) -> Option<i32> {
 	// check boundaries
 	let ulimit = 20; // upper, exclusive
-	let llimit = -1; // lower, exclusive
+	let llimit = !0; // lower, exclusive
 	let nr = 4; // of multiplicands - 1
 	match dir {
 		&Direction::Horizontal => if column+(nr-1) >= ulimit { return None },
