@@ -5,13 +5,14 @@ use std::cmp::{Ord, Ordering, max, min};
 use Suit::*;
 use Face::*;
 use Hand::*;
+use std::convert::From;
 
 #[derive(Debug, Eq, PartialEq, Clone, Copy)]
 enum Suit { Spade, Club, Diamond, Heart, }
 
 #[allow(dead_code)]
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Copy)]
-enum FaceF {
+enum Face {
 	Two     = 2,
 	Three   = 3,
 	Four    = 4,
@@ -27,18 +28,16 @@ enum FaceF {
 	Ace     = 14,
 }
 
-#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Copy)]
-enum Face { Pip(u8), Jack, Queen, King, Ace, }
+impl From<u8> for Face {
+	fn from(num: u8) -> Face {
+		assert!( num >= 2 && num <= 10 );
+		unsafe { std::mem::transmute(num) }
+	}
+}
 
 impl Face {
 	fn val(&self) -> u8 {
-		match *self {
-			Pip(n) => n,
-			Jack => 11,
-			Queen => 12,
-			King => 13,
-			Ace => 14,
-		}
+		*self as u8
 	}
 }
 
@@ -60,14 +59,14 @@ impl PartialOrd for Card {
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone, Copy)]
-enum Hand { // Hand(highest_value_in_hand)
+enum Hand { // Hand(highest_face_in_hand)
 	HighCard(u8),
 	Pair(u8),
 	TwoPairs(u8,u8), // higher, lower
 	ThreeOfAKind(u8),
 	Straight(u8),
 	Flush(u8),
-	FullHouse(u8,u8), // threes, twos
+	FullHouse(u8 ,u8), // threes, twos
 	FourOfAKind(u8),
 	StraightFlush(u8),
 	RoyalFlush, //just StraightFlush(max)
@@ -76,8 +75,8 @@ enum Hand { // Hand(highest_value_in_hand)
 fn parse_single_card ( card_str : &str ) -> Card {
 	let mut chars = card_str.chars();
 	let face = match chars.next().unwrap() {
-		ch @ '2'...'9' => Pip(ch.to_digit(10).unwrap() as u8),
-		'T' => Pip(10),
+		ch @ '2'...'9' => (ch.to_digit(10).unwrap() as u8).into(),
+		'T' => Ten,
 		'A' => Ace,
 		'Q' => Queen,
 		'K' => King,
@@ -162,13 +161,13 @@ fn find_same_kinds_and_fullhouse ( hand : &Vec<Card> ) -> Vec<Hand> {
 	// draining to prevent double dipping
 	if pairs.len() == 1 && three_kind.len() == 1 {
 		hands.push( FullHouse(three_kind[0], pairs[0]) );
-		pairs.clear();
-		three_kind.clear();
+		//pairs.clear();
+		//three_kind.clear();
 	} else if pairs.len() == 2 {
 		let high_val = max(pairs[0], pairs[1]);
 		let low_val = min(pairs[0], pairs[1]);
 		hands.push( TwoPairs( high_val, low_val ) );
-		pairs.clear();
+		//pairs.clear();
 	};
 
 	for &val in &four_kind  { hands.push( FourOfAKind(val) ) }
@@ -222,8 +221,6 @@ fn main() {
 		if hand1 > hand2 { player1_wins += 1 };
 	}
 	println!("{}", player1_wins);
-	//let a: i32 = FaceF::Three as i32;
-	//println!("{}", a as FaceF);
 }
 
 #[bench]
