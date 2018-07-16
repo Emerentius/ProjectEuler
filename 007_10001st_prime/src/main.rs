@@ -1,8 +1,6 @@
 // prime calculation copied from 004
-use std::num::Float;
-
 fn main() {
-	let mut prime_numbers = vec::<i64>![2];
+	let mut prime_numbers = vec![2];
 	let nth_prime = 10001; // find n-th prime
 	prime_numbers.reserve(nth_prime);
 	let mut not_a_prime = false;
