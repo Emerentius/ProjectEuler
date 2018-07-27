@@ -1,3 +1,6 @@
+#![feature(test)]
+extern crate test;
+
 // detect cycles in the sequence of rests
 // reuse the cache
 fn cycle_len(divisor: u32, rests: &mut Vec<u32>) -> usize {
@@ -28,4 +31,9 @@ fn main() {
 		.map(|div| cycle_len(div, &mut cache))
 		.max().unwrap();
 	println!("{}", max_cycle);
+}
+
+#[bench]
+fn bench(b: &mut test::Bencher) {
+	b.iter(main)
 }
