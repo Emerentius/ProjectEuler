@@ -3,5 +3,6 @@ name = "204_Generalised_Hamming_Numbers"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
-[dependencies.prime]
-path = "../../libraries/prime"
+[dependencies]
+primal = "0.2.3"
+bit-vec = "0.5.0"
