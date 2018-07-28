@@ -3,3 +3,6 @@
 name = "032_Pandigital_products"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+permutohedron = "0.2.4"
