@@ -1,5 +1,4 @@
 #![feature(test)]
-#![feature(btree_range, collections_bound)]
 extern crate test;
 use std::collections::BTreeMap;
 
@@ -17,9 +16,6 @@ fn is_palindrome(mut num: u64, cache: &mut Vec<u64>) -> bool {
 
 fn square(n: u64) -> u64 { n*n }
 fn cube(n: u64)   -> u64 { n*n*n }
-
-fn diff_to_next_sq(n: u64) -> u64 { 2*n + 1 }
-fn diff_to_next_cu(n: u64) -> u64 { 3*(n*(n+1)) + 1 }
 
 fn main() {
     let mut cache = vec![];
@@ -62,9 +58,6 @@ fn main() {
                 Some(&mut None) => (),
                 Some(&mut Some(old_count)) => {
                     palindrome_sum_count.insert(sum, Some(old_count+1));
-                    //if old_count+1 == 4 && sum <= next_lower_boundary {
-                    //    nums_found += 1;
-                    //}
                 }
 
             }
@@ -73,8 +66,7 @@ fn main() {
         // no numbers encountered in the future can be lower than this
         let next_lower_boundary = std::cmp::min(square(n_sq+1), cube(n_cu+1)) + 1;
 
-        use std::collections::Bound::*;
-        for (num, sum_count) in palindrome_sum_count.range(Included(&lower_boundary), Excluded(&next_lower_boundary))
+        for (num, sum_count) in palindrome_sum_count.range(lower_boundary..next_lower_boundary)
             .flat_map(|(&num, &opt_count)| opt_count.map(|count| (num, count))) // filter out non-palindromes (signified by None)
         {
             if sum_count == 4 {
