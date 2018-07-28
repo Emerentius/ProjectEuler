@@ -1,0 +1,10 @@
+[package]
+
+name = "500_Problem_500"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+version = "*"
+path = "../../libraries/prime"
+
