@@ -6,7 +6,7 @@ fn main() {
     // BTreeMap[(2digit_sum, remaining_length)] -> n_poss
     let mut length = 3;
     // n_poss[remaining_length] = Map<[first, middle]> -> count
-    let mut n_poss = vec![];
+    let mut n_poss: Vec<BTreeMap<_, _>> = vec![];
 
     // Generate iterator over i,j i+j <= 9
     let j_iter = |i| (0..9+1-i).map(move |j| (i, j));
