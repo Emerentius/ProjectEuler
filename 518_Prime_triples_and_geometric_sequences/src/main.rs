@@ -31,10 +31,10 @@ fn main() {
 			let c = k*p*p - 1;
 			if c >= LIMIT {	break }
 			if !sieve.is_prime(c) { continue }
-			for q in (1..p).filter(|&q| gcd(p, q) == 1) {
+			for q in 1..p {
 				let a = k*q*q - 1;
 				let b = k*q*p - 1;
-				if sieve.is_prime(a) && sieve.is_prime(b) {
+				if sieve.is_prime(a) && sieve.is_prime(b) && gcd(p, q) == 1 {
 					sum += a + b + c;
 				}
 			}
