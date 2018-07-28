@@ -1,0 +1,9 @@
+[package]
+name = "518_Prime_triples_and_geometric_sequences"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+primal = "0.2"
+num = "0.1"
+# path = "../../libraries/prime"
