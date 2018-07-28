@@ -3,5 +3,6 @@ name = "357_Prime_generating_integers"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
-[dependencies.prime]
-path = "../../libraries/prime"
+[dependencies]
+primal = "0.2.3"
+bitvec = "0.5.0"
