@@ -1,0 +1,7 @@
+[package]
+name = "159_Consecutive_positive_divisors"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+path = "../../libraries/prime"
