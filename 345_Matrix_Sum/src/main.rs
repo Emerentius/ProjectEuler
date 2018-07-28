@@ -1,16 +1,13 @@
 #![feature(test)]
-#![feature(collections)]
 extern crate test;
 
 fn find_max_sum (slice: &[Vec<(u32, u32)>], cols_seen: [bool;15]) -> Option<(u32, [bool;15])> {
     //print!("{}:", 16-slice.len());
-    match slice.first() {
+    match slice.split_first() {
         None => return Some((0, cols_seen)), // recursion ends
-        Some(row) => {
-            let tail = slice.tail();
+        Some((row, tail)) => {
             let mut results = vec![];
             for &(num, col) in row.iter() {
-                //println!("\t({},{})", num, col);
                 if cols_seen[col as usize] { continue }
                 let mut loc_cols_seen = cols_seen;
                 loc_cols_seen[col as usize] = true;
@@ -48,7 +45,7 @@ fn main() {
     let mut rows = vec![];
     for chunk in matrix.chunks(15) {
         let mut next_row = vec![];
-        next_row.push_all(chunk);
+        next_row.extend(chunk);
 
         let mut sorted_row : Vec<_> = next_row.into_iter().zip(0..15).collect();
         sorted_row.sort_by(|a,b| a.cmp(b).reverse());
@@ -74,10 +71,6 @@ fn main() {
             }
         }
     }
-
-    /*for row in rows {
-        println!("{:?}", row);
-    }*/
 
     println!("{:?}", find_max_sum(&rows, [false;15]).unwrap().0);
 }
