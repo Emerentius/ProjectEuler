@@ -4,5 +4,4 @@ version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
 [dependencies]
-num = "*"
-bitvec = "0.5.0"
+num = "0.2.0"
