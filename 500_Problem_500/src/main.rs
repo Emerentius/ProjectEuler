@@ -1,19 +1,19 @@
 #![feature(test)]
 extern crate test;
-extern crate prime;
+extern crate primal;
 
 fn main() {
 	let modulo = 500500507;
 	let goal_exp = 500500;
 	let max_prime = 7376507; // this is the 500500th prime (found out by prior calculation)
-	let primes = prime::sieve(max_prime);
+	let primes = primal::Sieve::new(max_prime);
 
 	let mut lowest_composite = 1;
 	// Vec<[prime, occurences]>, prime factors of lowest_composite
 	let mut composited_primes : Vec<[u64; 2]> = vec![];
 	let mut divisors_exp = 0; // 2^divisors_exp divisors
 
-	'new_prime:for (i,&new_prime) in primes.iter().enumerate() {
+	'new_prime:for (i,new_prime) in primes.primes_from(1).enumerate() {
 		let new_prime = new_prime as u64;
 		// check for higher prime powers later on only
 		// there won't be many increases
@@ -52,5 +52,5 @@ fn bench ( b:&mut test::Bencher) {
 
 #[bench]
 fn primes ( b:&mut test::Bencher) {
-	b.iter(|| prime::sieve(7376507));
+	b.iter(|| primal::Sieve::new(7376507));
 }
