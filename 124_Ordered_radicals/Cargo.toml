@@ -1,0 +1,7 @@
+[package]
+name = "124_Ordered_radicals"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+path = "../../libraries/prime"
