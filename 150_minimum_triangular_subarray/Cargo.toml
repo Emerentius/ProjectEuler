@@ -1,0 +1,6 @@
+[package]
+name = "150_searching_a_triangular_array_for_minimum_sum_subtriangle"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
