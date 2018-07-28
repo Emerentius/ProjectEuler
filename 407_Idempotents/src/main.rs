@@ -62,7 +62,7 @@ fn main() {
         // account for numbers 1, 2, 3 that were left out above
         let mut total_sum = 2;
         for jh in threads {
-            total_sum += jh.join();
+            total_sum += jh.join().unwrap();
         }
         println!("{}", total_sum);
     })
