@@ -1,0 +1,8 @@
+[package]
+name = "510_Tangent_circles"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+num = "*"
+bitvec = "0.5.0"
