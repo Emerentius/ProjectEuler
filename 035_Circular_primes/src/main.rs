@@ -1,13 +1,12 @@
 #![feature(test)]
-#![feature(unicode)]
 extern crate test;
 
 extern crate prime; // my own library, erasthothenes sieve and trial division
 
-fn is_circular_prime(prime:u64, primes: &[u64]) -> bool {
+fn is_circular_prime(prime:u64) -> bool {
 	let mut digits : Vec<u64> = vec![];
-	for grapheme in prime.to_string().graphemes(true).rev() {
-		digits.push( grapheme.parse().unwrap() )
+	for ch in prime.to_string().chars().rev() {
+		digits.push( ch.to_digit(10).unwrap() as _ )
 	}
 
 	for rotation in digits.iter().cycle().take(2*digits.len() - 1).collect::<Vec<&u64>>().windows( digits.len() ) {
@@ -26,8 +25,8 @@ fn main() {
 	let primes = prime::sieve(1_000_000);
 
 	let mut counter = 2; // 2 and 5 slips through due to small optimisation
-	for &prime in &primes {
-		if is_circular_prime(prime, &primes) { counter += 1 }
+	for prime in primes {
+		if is_circular_prime(prime) { counter += 1 }
 	}
 	println!("{}", counter);
 }
