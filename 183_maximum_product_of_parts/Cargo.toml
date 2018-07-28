@@ -1,0 +1,7 @@
+[package]
+name = "183_maximum_product_of_parts"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+num = "0.2.0"
