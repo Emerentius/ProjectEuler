@@ -1,0 +1,11 @@
+[package]
+
+name = "069_Totient_maximum"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.num]
+version = "*"
+
+[dependencies.prime]
+path = "../../libraries/prime"
