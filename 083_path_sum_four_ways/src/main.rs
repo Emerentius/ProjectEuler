@@ -47,9 +47,9 @@ fn main() {
 
         // loop through  existing neighbours
         // save path sum into new cells and push them onto queue
-        for &(row_off, col_off) in &[(0,1), (0,-1), (1,0), (-1,0)] {
+        for &(row_off, col_off) in &[(0isize ,1isize), (0,-1), (1,0), (-1,0)] {
             // n_row/col = neighbour_row/col
-            let (n_row, n_col) = (cur_row + row_off, cur_col + col_off);
+            let (n_row, n_col) = (cur_row + row_off as usize, cur_col + col_off as usize);
             let neighb = matrix.get(n_row)
                 .and_then(|vec| vec.get(n_col))
                 .cloned();
