@@ -1,0 +1,9 @@
+[package]
+
+name = "058_Spiral_primes"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+version = "*"
+path = "../../libraries/prime"
