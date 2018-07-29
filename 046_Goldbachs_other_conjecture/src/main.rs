@@ -1,11 +1,12 @@
+#![feature(test)]
 extern crate test;
 extern crate prime;
 use prime::is_prime;
 
 fn main() {
 	let primes = prime::sieve(1_000_000);
-	'n :for n in std::iter::count(1,2) {
-		if is_prime(n, &primes) { continue }
+	'n :for n in (3..).step_by(2) {
+		if is_prime(n) { continue }
 		'prime: for &prime in primes.iter().skip(1) {
 			if prime > n {
 				println!("{}", n);
