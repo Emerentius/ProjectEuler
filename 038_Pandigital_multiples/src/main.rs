@@ -1,17 +1,27 @@
+#![feature(test)]
 extern crate test;
-use std::num::Int;
+extern crate permutohedron;
+
+use permutohedron::LexicalPermutation;
 
 fn calc_num ( digits : &[u64] ) -> u64 {
 	let mut num = 0;
 	for (i,&digit) in digits.iter().rev().enumerate() {
-		num += digit * 10.pow(i as u32);
+		num += digit * 10u64.pow(i as u32);
 	}
 	num
 }
 
 fn main() {
-	let digits = [1,2,3,4,5,6,7,8,9];
-	let mut pandigitals : Vec<_> = digits.permutations().collect();
+	let mut digits = [1,2,3,4,5,6,7,8,9];
+	let mut pandigitals = vec![];
+	loop {
+		pandigitals.push(digits);
+		if !digits.next_permutation() {
+			break
+		}
+	}
+
 	pandigitals.sort();
 
 	'pandigital: for pandigital in pandigitals.iter().rev() {
