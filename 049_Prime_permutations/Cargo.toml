@@ -4,6 +4,9 @@ name = "049_Prime_permutations"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
+[dependencies]
+permutohedron = "0.2.4"
+
 [dependencies.prime]
 version="*"
 path="../../libraries/prime"
