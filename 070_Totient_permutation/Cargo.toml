@@ -4,5 +4,8 @@ name = "070_Totient_permutation"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
+[dependencies]
+bit-vec = "0.5.0"
+
 [dependencies.prime]
 path = "../../libraries/prime"
