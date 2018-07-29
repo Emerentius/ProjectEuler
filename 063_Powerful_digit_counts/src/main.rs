@@ -1,5 +1,5 @@
+#![feature(test)]
 extern crate test;
-use std::num::Float;
 
 fn len(mut num : f64, base : f64) -> u64 {
     let mut length = 0;
