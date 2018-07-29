@@ -1,20 +1,9 @@
-#![feature(old_path, io)]
-#![warn(deprecated)]
+#![feature(test)]
 extern crate test;
-
-use std::io::prelude::*;
-use std::fs::File;
-use std::string::String;
 
 fn main() {
 	// read file
-	let path = Path::new(r".\p059_cipher.txt");
-	let mut file = match File::open(&path) {
-                Err(why) => panic!("couldn't open {}: {}", path.display(), why.description()),
-		Ok(file) => file,
-	};
-	let mut cipher_str = String::new();
-	file.read_to_string(&mut cipher_str);
+	let cipher_str = include_str!("../p059_cipher.txt");
 
 	// parse into byte vector
 	let cipher : Vec<u8> = cipher_str.trim()
