@@ -1,0 +1,8 @@
+[package]
+name = "086_cuboid_route"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.int_sqrt]
+path = "../../libraries/int_sqrt"
+#D:\Code\libraries\int_sqrt
