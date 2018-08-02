@@ -1,0 +1,10 @@
+solution has every prime factor as often as the maximum multiplicity
+of the prime factor among the numbers 1-20
+need to only look at pure powers to find maximum multiplicity
+2  - 4 times (16)
+3  - 2 times (9)
+
+all further squares are > 20
+
+solution = 2^4 * 3^2 * 5 * 7 * 11 * 13 * 17 * 19 = 232792560
+
