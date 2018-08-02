@@ -1,0 +1,7 @@
+[package]
+name = "387_harshad_numbers"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+primal = "0.2"
