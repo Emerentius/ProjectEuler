@@ -1,0 +1,9 @@
+[package]
+
+name = "146_Investigating_a_Prime_Pattern"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+version = "*"
+path = "../../libraries/prime"
