@@ -1,0 +1,6 @@
+[package]
+name = "323_bitwise_or_operations_on_random_integers"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.rand]
