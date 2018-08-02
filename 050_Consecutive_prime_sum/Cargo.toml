@@ -1,0 +1,9 @@
+[package]
+
+name = "050_Consecutive_prime_sum"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+version = "*"
+path = "../../libraries/prime"
