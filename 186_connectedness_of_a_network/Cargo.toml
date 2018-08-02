@@ -1,0 +1,8 @@
+[package]
+name = "186_connectedness_of_a_network"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+union-find = "0.3.1"
+#disjoint-sets = "0.3.2"
