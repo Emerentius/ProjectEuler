@@ -1,0 +1,11 @@
+[[package]]
+name = "098_anagramic_squares"
+version = "0.1.0"
+dependencies = [
+ "my_combinatorics 0.1.0",
+]
+
+[[package]]
+name = "my_combinatorics"
+version = "0.1.0"
+
