@@ -1,6 +1,23 @@
-#![feature(collections)]
 #![feature(test)]
 extern crate test;
+extern crate permutohedron;
+use permutohedron::LexicalPermutation;
+
+fn permutations(mut digits: Vec<i32>) -> impl Iterator<Item = Vec<i32>> {
+	let mut finished = false;
+	std::iter::repeat(())
+		.scan((), move |(), ()| {
+			let next = digits.clone();
+			match (digits.next_permutation(), finished) {
+				(true, _) => Some(next),
+				(false, false) => {
+					finished = true;
+					Some(next)
+				}
+				(false, true) => None,
+			}
+		})
+}
 
 fn helper_possible_results(prev_results: Vec<i32>, num:i32, residual_ratios: Vec<[i32; 2]>) -> (Vec<i32>, Vec<[i32; 2]>) {
     let mut new_results = vec![];
@@ -35,12 +52,12 @@ fn helper_possible_results(prev_results: Vec<i32>, num:i32, residual_ratios: Vec
 
 fn calc_possible_results (a:i32, b:i32, c:i32, d:i32) -> Vec<i32> {
     let mut overall_results = vec![];
-    for perm in [a,b,c,d].permutations() {
-        if let [a,b,c,d] = &perm[..] {
+    for perm in permutations(vec![a,b,c,d]) {
+        if let &[a,b,c,d] = &perm[..] {
             let (result1, residual1) = helper_possible_results(vec![a], b, vec![]);
             let (result2, residual2) = helper_possible_results(result1, c, residual1);
             let (result3, _) = helper_possible_results(result2, d, residual2);
-            overall_results.push_all( &result3[..] );
+            overall_results.extend( &result3[..] );
             overall_results.sort();
             overall_results.dedup();
         }
