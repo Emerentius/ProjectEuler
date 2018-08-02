@@ -1,0 +1,4 @@
+[package]
+name = "145_How_many_reversible_numbers_are_there_below_one_billion"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
