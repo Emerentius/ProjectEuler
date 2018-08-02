@@ -1,0 +1,21 @@
+[[package]]
+name = "351_hexagonal_orchards"
+version = "0.1.0"
+dependencies = [
+ "prime 0.0.1",
+]
+
+[[package]]
+name = "bit-vec"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "prime"
+version = "0.0.1"
+dependencies = [
+ "bit-vec 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[metadata]
+"checksum bit-vec 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "37f7dbff7ca04d1e59d57e5b614f6ef1d2b1953980b1bf65680c28343afcf3a7"
