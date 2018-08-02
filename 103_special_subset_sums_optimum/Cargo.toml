@@ -1,0 +1,6 @@
+[package]
+name = "_103_special_subset_sums_optimum"
+version = "0.1.0"
+authors = ["Emerentius <emerentius@arcor.de>"]
+
+[dependencies]
