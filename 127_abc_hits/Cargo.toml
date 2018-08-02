@@ -1,0 +1,13 @@
+[package]
+name = "127_abc_hits"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.primal]
+version = "0.2"
+[dependencies.num]
+version = "0.1"
+
+[dependencies.prime]
+version = "0.0.1"
+path = "../../libraries/prime"
