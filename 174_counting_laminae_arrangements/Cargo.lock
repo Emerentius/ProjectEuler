@@ -1,0 +1,14 @@
+[[package]]
+name = "174_counting_laminae_arrangements"
+version = "0.1.0"
+dependencies = [
+ "itertools 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "itertools"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum itertools 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "ca5b65c47287ebca6d1ef0a9850abb452dc87e302884818368d1764606dc8b6b"
