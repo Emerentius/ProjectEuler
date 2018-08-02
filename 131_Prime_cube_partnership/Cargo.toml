@@ -1,0 +1,6 @@
+[package]
+name = "131_Prime_cube_partnership"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.primal]
