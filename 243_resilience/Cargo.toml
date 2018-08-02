@@ -1,0 +1,7 @@
+[package]
+name = "243_resilience"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+path = "../../libraries/prime"
