@@ -1,0 +1,5 @@
+[package]
+
+name = "028_Number_spiral_diagonals"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
