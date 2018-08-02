@@ -1,0 +1,8 @@
+[package]
+name = "259_reachable_numbers"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+num = "0.1"
+smallvec = "0.5"
