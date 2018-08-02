@@ -1,0 +1,7 @@
+[package]
+name = "073_Counting_fractions_in_a_range"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.prime]
+path = "../../libraries/prime"
