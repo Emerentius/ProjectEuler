@@ -1,0 +1,14 @@
+[[package]]
+name = "166_criss_cross"
+version = "0.1.0"
+dependencies = [
+ "itertools 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "itertools"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum itertools 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)" = "20707e41669ae77e21bebd5c5ac30b15fd666a5c5039b0ac3e4a44c27c041af3"
