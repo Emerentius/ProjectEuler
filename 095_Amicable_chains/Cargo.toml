@@ -1,0 +1,6 @@
+[package]
+name = "095_Amicable_chains"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.vec_map]
