@@ -1,0 +1,8 @@
+[package]
+
+name = "057_Square_root_convergents"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.num]
+version = "*"
