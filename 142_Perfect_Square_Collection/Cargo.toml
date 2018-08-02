@@ -1,0 +1,7 @@
+[package]
+name = "142_Perfect_Square_Collection"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.int_sqrt]
+path = "../../libraries/int_sqrt"
