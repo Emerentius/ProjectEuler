@@ -1,13 +1,7 @@
-def digit_sum(string):
-    summ = 0
-    for ch in string:
-        summ += int(ch)
-    return summ
+import itertools
 
-max_digit_sum = 0
-for a in range(1,100):
-    for b in range(1,100):
-        digit_sum_ = digit_sum(str(a**b))
-        if digit_sum_ > max_digit_sum:
-            max_digit_sum = digit_sum_
-print max_digit_sum
+it = itertools.product(range(1, 100), range(1, 100))
+it = (str(a**b) for (a, b) in it)
+it = (sum(int(digit) for digit in num_string) for num_string in it)
+print(max(it))
+
