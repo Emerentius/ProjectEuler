@@ -1,0 +1,8 @@
+[package]
+name = "429_Sum_of_squares_of_unitary_divisors"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+primal = "0.2"
+num = "*"
