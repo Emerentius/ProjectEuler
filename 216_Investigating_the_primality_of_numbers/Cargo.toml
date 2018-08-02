@@ -1,0 +1,6 @@
+[package]
+name = "216_Investigating_the_primality_of_numbers"
+version = "0.1.0"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies.primal]
