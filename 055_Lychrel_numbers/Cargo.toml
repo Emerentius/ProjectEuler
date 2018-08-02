@@ -1,0 +1,8 @@
+[package]
+
+name = "055_Lychrel_numbers"
+version = "0.0.1"
+authors = ["Emerentius <Emerentius@arcor.de>"]
+
+[dependencies]
+num = "0.1.42"
