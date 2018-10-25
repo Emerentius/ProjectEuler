@@ -4,6 +4,6 @@ name = "035_Circular_primes"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
-[dependencies.prime]
-version = "*"
-path = "../../libraries/prime"
+[dependencies.euler_utils]
+version = "0.1"
+path = "../euler_utils"

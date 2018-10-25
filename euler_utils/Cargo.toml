@@ -1,0 +1,7 @@
+[package]
+name = "euler_utils"
+version = "0.1.0"
+authors = ["Emerentius <emerentius@arcor.de>"]
+
+[dependencies]
+bit-vec = "0.5.0"

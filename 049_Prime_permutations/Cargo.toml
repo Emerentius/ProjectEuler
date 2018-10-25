@@ -7,6 +7,6 @@ authors = ["Emerentius <Emerentius@arcor.de>"]
 [dependencies]
 permutohedron = "0.2.4"
 
-[dependencies.prime]
+[dependencies.euler_utils]
 version="*"
-path="../../libraries/prime"
+path="../euler_utils"

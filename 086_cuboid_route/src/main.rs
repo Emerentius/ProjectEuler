@@ -1,5 +1,5 @@
-extern crate int_sqrt;
-use int_sqrt::IntSqrt;
+extern crate euler_utils;
+use euler_utils::num::IntSqrt;
 
 fn main() {
     let mut counter = 0;

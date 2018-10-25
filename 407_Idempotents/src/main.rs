@@ -1,4 +1,3 @@
-#![feature(step_by)]
 extern crate primal;
 extern crate crossbeam;
 

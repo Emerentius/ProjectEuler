@@ -1,4 +1,5 @@
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 
 fn main() {
     let totients = prime::Phi32::new(1_000_000_000);

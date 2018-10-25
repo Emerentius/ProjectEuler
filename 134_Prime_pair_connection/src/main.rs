@@ -1,4 +1,5 @@
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 
 fn digit_length(mut num: u64) -> u32 {
     let mut length = 0;

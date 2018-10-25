@@ -7,5 +7,6 @@ authors = ["Emerentius <Emerentius@arcor.de>"]
 [dependencies.num]
 version = "*"
 
-[dependencies.prime]
-path = "../../libraries/prime"
+[dependencies.euler_utils]
+path = "../euler_utils"
+version = "0.1"

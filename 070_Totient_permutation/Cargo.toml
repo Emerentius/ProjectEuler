@@ -7,5 +7,6 @@ authors = ["Emerentius <Emerentius@arcor.de>"]
 [dependencies]
 bit-vec = "0.5.0"
 
-[dependencies.prime]
-path = "../../libraries/prime"
+[dependencies.euler_utils]
+path = "../euler_utils"
+version = "0.1"

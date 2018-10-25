@@ -1,4 +1,5 @@
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 extern crate bit_vec;
 
 fn phi (n: u64, factors: Vec<[u64;2]>) -> u64 {

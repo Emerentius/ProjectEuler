@@ -3,5 +3,6 @@ name = "111_Primes_with_runs"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
-[dependencies.prime]
-path = "../../libraries/prime"
+[dependencies.euler_utils]
+path = "../euler_utils"
+version = "0.1"

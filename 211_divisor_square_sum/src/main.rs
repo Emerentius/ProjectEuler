@@ -1,6 +1,5 @@
-#![feature(step_by)]
-extern crate int_sqrt; // my integer squareroot library
-use int_sqrt::IntSqrt;
+extern crate euler_utils; 
+use euler_utils::num::IntSqrt;
 
 fn main() {
     let mut sigma_2 = vec![0; 64_000_000];

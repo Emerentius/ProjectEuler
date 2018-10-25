@@ -1,8 +1,7 @@
-#![feature(step_by)]
 #![feature(test)]
-#![feature(collections)]
 extern crate test;
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 
 fn digits (mut num:u64) -> [u8;10] {
     let mut digits = [0;10];

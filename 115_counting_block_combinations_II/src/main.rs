@@ -1,13 +1,11 @@
 #![feature(test)]
 #![feature(unboxed_closures)]
-#![feature(core)]
+#![feature(fn_traits)]
 extern crate test;
 use std::collections::BTreeMap;
 use std::ops::{FnOnce, FnMut};
 
 const MIN_BLOCK_LEN: u64 = 50;
-const ROW_LEN: u64 = 50;
-const ROW_LEN_PLUS: u64 = 51;
 
 struct CombinationCounter {
     memoized_values: BTreeMap<u64, u64>,
@@ -38,7 +36,7 @@ impl FnMut<(u64,)> for CombinationCounter {
 
             // empty block
             sum += (self)(pos + 1);
-            for block_len in (MIN_BLOCK_LEN..self.row_len-pos+1) {
+            for block_len in MIN_BLOCK_LEN..self.row_len-pos+1 {
                 sum += (self)(pos + block_len + 1);
             }
 

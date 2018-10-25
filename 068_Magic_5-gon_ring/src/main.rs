@@ -1,6 +1,4 @@
 #![feature(test)]
-#![feature(iter_arith)]
-#![feature(step_by)]
 extern crate test;
 // map numbers 0...14 to 0...9
 fn index(mut num: usize) -> usize {

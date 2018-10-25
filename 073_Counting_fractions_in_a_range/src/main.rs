@@ -1,6 +1,7 @@
 #![feature(test)]
 extern crate test;
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 
 fn main() {
     let count = prime::FareySequence::new(12_000).skip_while(|&(n,d)| !(n == 1 && d == 3) )

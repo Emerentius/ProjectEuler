@@ -1,5 +1,4 @@
 #![feature(test)]
-#![feature(step_by)]
 extern crate test;
 
 fn main() {

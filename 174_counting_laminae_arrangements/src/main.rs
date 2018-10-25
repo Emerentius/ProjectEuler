@@ -1,5 +1,4 @@
 #![feature(test)]
-#![feature(step_by)]
 fn main() {
     let mut L = [0u8;1_000_001];
 

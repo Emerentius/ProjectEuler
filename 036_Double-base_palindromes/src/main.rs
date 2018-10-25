@@ -1,5 +1,4 @@
 #![feature(test)]
-#![feature(step_by)]
 extern crate test;
 
 fn reverse ( mut number : u32, base : u32 ) -> u32 {

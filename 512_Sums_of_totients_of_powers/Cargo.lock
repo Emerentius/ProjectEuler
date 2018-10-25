@@ -1,11 +1,21 @@
-[root]
+[[package]]
 name = "512_Sums_of_totients_of_powers"
 version = "0.1.0"
 dependencies = [
- "prime 0.0.1",
+ "euler_utils 0.1.0",
 ]
 
 [[package]]
-name = "prime"
-version = "0.0.1"
+name = "bit-vec"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
+[[package]]
+name = "euler_utils"
+version = "0.1.0"
+dependencies = [
+ "bit-vec 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[metadata]
+"checksum bit-vec 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = "4440d5cb623bb7390ae27fec0bb6c61111969860f8e3ae198bfa0663645e67cf"

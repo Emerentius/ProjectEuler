@@ -1,6 +1,7 @@
 #![feature(test)]
 extern crate test;
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 
 fn find_biggest_pandigital_prime ( prime_numbers:&[u64] ) -> Option<u64> {
 	'primes : for &prime in prime_numbers.iter().rev() {

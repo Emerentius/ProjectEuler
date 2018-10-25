@@ -3,5 +3,6 @@ name = "203_squarefree_binomial_coefficients"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
-[dependencies.int_sqrt]
-path = "../../libraries/int_sqrt"
+[dependencies.euler_utils]
+path = "../euler_utils"
+version = "0.1"

@@ -1,6 +1,7 @@
 #![feature(test)]
 extern crate test;
-extern crate prime; // own library
+extern crate euler_utils;
+use euler_utils::prime; // own library
 
 fn main() {
     let primes = prime::sieve(100); // will escalate fast, think factorial

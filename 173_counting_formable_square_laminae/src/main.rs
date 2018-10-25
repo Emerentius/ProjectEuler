@@ -1,5 +1,4 @@
 #![feature(test)]
-#![feature(step_by)]
 fn main() {
     let mut laminae_count = 0;
     for mut tile_count in (8..1_000_000+1).step_by(4) { // side_length >= 3

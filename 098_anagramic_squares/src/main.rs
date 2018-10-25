@@ -1,8 +1,8 @@
 #![feature(test)]
 extern crate test;
 
-extern crate my_combinatorics;
-use my_combinatorics::PartialPermutationsStreamIter;
+extern crate euler_utils;
+use euler_utils::combinatorics::PartialPermutationsStreamIter;
 use std::collections::{HashMap, BTreeMap};
 
 fn count_letters(word: &str) -> [u8; 26] {
@@ -26,7 +26,7 @@ fn main() {
 
     // filter out words without anagrams
     let anagrams = anagram_map.into_iter()
-        .map(|(counts, words)| words)
+        .map(|(_, words)| words)
         .filter(|words| words.len() > 1)
         .collect::<Vec<_>>();
 

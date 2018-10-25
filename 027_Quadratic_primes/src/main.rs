@@ -1,4 +1,5 @@
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 
 // works but so goddamn ugly with all those type casts
 

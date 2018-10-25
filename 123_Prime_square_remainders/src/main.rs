@@ -1,7 +1,7 @@
 #![feature(test)]
-#![feature(step_by)]
 extern crate test;
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 
 fn main() {
     let primes = prime::sieve(1_000_000);

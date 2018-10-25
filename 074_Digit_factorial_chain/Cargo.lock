@@ -1,4 +1,4 @@
-[root]
+[[package]]
 name = "074_Digit_factorial_chain"
 version = "0.0.1"
 

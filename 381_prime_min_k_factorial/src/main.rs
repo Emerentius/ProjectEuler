@@ -2,8 +2,8 @@
 extern crate test;
 
 extern crate primal;
-extern crate euler_tools;
-use euler_tools::multiplicative_inverse;
+extern crate euler_utils;
+use euler_utils::num::multiplicative_inverse;
 
 // sum (p-k), k in 1..5+1
 fn sum(prime: i64) -> i64 {

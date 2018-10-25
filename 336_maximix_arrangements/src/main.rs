@@ -1,5 +1,5 @@
-extern crate euler_tools;
-use euler_tools::PermutationsStreamIter; // Iterator over all permutations
+extern crate euler_utils;
+use euler_utils::combinatorics::PermutationsStreamIter; // Iterator over all permutations
 
 fn next_carriage(carr: char) -> char {
     (carr as u8 + 1) as char
@@ -59,4 +59,5 @@ fn main() {
     for el in &maximix_arrangements[NTH_MAXIMIX - 1] {
         print!("{}", el);
     }
+    println!(); // empty line
 }

@@ -1,5 +1,3 @@
-#![feature(step_by)] // unstable for the time being
-
 fn main() {
     const MAX: usize = 40_000_000;
     const CHAIN_LEN: usize = 25;

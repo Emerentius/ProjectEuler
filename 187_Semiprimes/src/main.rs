@@ -1,6 +1,7 @@
 #![feature(test)]
 extern crate test;
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 
 fn main() {
     let max : u64 = 100_000_000;

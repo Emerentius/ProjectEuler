@@ -1,8 +1,8 @@
 #![feature(test)]
-extern crate my_combinatorics;
+extern crate euler_utils;
 extern crate primal;
 
-use my_combinatorics::PermutationsStreamIter;
+use euler_utils::combinatorics::PermutationsStreamIter;
 
 fn count(min_num: u64, remaining_digits: &[u64]) -> u64 {
     if remaining_digits.len() == 0 { return 1 }

@@ -1,4 +1,5 @@
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 use std::cmp::max;
 
 const LIMIT : u64 = 10_000_000;

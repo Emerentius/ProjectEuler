@@ -1,4 +1,5 @@
-extern crate prime; // my prime library, contains a totient sieve
+extern crate euler_utils;
+use euler_utils::prime; // my prime library, contains a totient sieve
 
 const N: u32 = 100_000_000;
 

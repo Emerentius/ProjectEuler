@@ -1,7 +1,8 @@
 #![feature(test)]
 extern crate test;
 
-extern crate prime; // my own library, erasthothenes sieve and trial division
+extern crate euler_utils;
+use euler_utils::prime; // my own library, eratosthenes sieve and trial division
 
 fn is_circular_prime(prime:u64) -> bool {
 	let mut digits : Vec<u64> = vec![];

@@ -1,6 +1,7 @@
 #![feature(test)]
 extern crate test;
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 use prime::FareySequence; // my prime library
 
 const N: usize = 100_000_000;

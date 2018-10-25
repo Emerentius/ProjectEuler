@@ -1,6 +1,7 @@
 #![feature(test)]
 extern crate test;
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 use std::collections::HashSet;
 use prime::is_prime;
 

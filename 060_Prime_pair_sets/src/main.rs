@@ -1,4 +1,5 @@
-extern crate prime;
+extern crate euler_utils;
+use euler_utils::prime;
 use std::collections::{HashMap, HashSet};
 use std::cmp::min;
 

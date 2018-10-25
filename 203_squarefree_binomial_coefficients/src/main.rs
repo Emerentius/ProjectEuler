@@ -1,7 +1,7 @@
 #![feature(test)]
 extern crate test;
-extern crate int_sqrt; // integer squareroot
-use int_sqrt::IntSqrt;
+extern crate euler_utils; // integer squareroot
+use euler_utils::num::IntSqrt;
 
 use std::collections::BTreeSet;
 

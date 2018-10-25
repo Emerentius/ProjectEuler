@@ -1,7 +1,8 @@
 #![feature(test)]
 extern crate test;
 
-extern crate prime; // my personal prime library
+extern crate euler_utils;
+use euler_utils::prime; // my personal prime library
 extern crate primal; // a better prime library
 
 use prime::FareySequence;

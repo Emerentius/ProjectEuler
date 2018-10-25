@@ -6,4 +6,3 @@ authors = ["Emerentius <Emerentius@arcor.de>"]
 [dependencies]
 primal = "0.2"
 num = "0.1"
-# path = "../../libraries/prime"

@@ -3,7 +3,7 @@ name = "347_Largest_integer_divisible_by_two_primes"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
-[dependencies.prime]
-path="../../libraries/prime"
+[dependencies.euler_utils]
+path="../euler_utils"
 
 [dependencies.primal]
