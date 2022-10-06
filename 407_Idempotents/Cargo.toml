@@ -1,6 +1,6 @@
 [package]
 authors = ["Emerentius <Emerentius@arcor.de>"]
-name = "_407_idempotents"
+name = "p407_idempotents"
 version = "0.0.1"
 [dependencies]
 crossbeam = "0.4.1"

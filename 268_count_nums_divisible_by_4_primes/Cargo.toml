@@ -1,5 +1,5 @@
 [package]
-name = "268_counting_nums_divisible_by_4_prime_factors"
+name = "p268_counting_nums_divisible_by_4_prime_factors"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

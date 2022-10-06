@@ -1,5 +1,5 @@
 [package]
-name = "193_squarefree_numbers"
+name = "p193_squarefree_numbers"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

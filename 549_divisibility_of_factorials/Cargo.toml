@@ -1,5 +1,5 @@
 [package]
-name = "549_divisibility_of_factorials"
+name = "p549_divisibility_of_factorials"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

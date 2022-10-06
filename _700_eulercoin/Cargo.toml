@@ -1,5 +1,5 @@
 [package]
-name = "_700_eulercoin"
+name = "p700_eulercoin"
 version = "0.1.0"
 authors = ["Emerentius <emerentius@arcor.de>"]
 edition = "2018"

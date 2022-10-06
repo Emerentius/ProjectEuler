@@ -1,6 +1,6 @@
 [package]
 
-name = "024_Lexicographic_permutations"
+name = "p024_lexicographic_permutations"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

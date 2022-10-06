@@ -1,5 +1,5 @@
 [package]
 
-name = "031_Coin_sums"
+name = "p031_coin_sums"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

@@ -1,6 +1,6 @@
 [package]
 
-name = "051_Prime_digit_replacements"
+name = "p051_prime_digit_replacements"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

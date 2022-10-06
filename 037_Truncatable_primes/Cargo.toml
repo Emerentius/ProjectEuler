@@ -1,6 +1,6 @@
 [package]
 
-name = "037_Truncatable_primes"
+name = "p037_truncatable_primes"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

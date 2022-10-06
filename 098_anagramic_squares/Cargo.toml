@@ -1,5 +1,5 @@
 [package]
-name = "098_anagramic_squares"
+name = "p098_anagramic_squares"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

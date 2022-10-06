@@ -1,4 +1,4 @@
 [package]
-name = "136_singleton_difference"
+name = "p136_singleton_difference"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]

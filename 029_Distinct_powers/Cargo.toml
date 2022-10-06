@@ -1,6 +1,6 @@
 [package]
 
-name = "029_Distinct_powers"
+name = "p029_distinct_powers"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

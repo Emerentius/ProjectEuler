@@ -1,5 +1,5 @@
 [package]
-name = "132_large_repunit_factors"
+name = "p132_large_repunit_factors"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

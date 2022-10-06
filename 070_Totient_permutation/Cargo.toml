@@ -1,6 +1,6 @@
 [package]
 
-name = "070_Totient_permutation"
+name = "p070_totient_permutation"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

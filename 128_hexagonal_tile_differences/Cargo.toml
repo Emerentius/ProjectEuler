@@ -1,5 +1,5 @@
 [package]
-name = "128_hexagonal_tile_differences"
+name = "p128_hexagonal_tile_differences"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

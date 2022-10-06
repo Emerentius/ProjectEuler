@@ -1,5 +1,5 @@
 [package]
-name = "348_sum_of_a_square_and_a_cube"
+name = "p348_sum_of_a_square_and_a_cube"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

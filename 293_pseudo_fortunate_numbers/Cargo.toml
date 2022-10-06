@@ -1,5 +1,5 @@
 [package]
-name = "293_pseudo_fortunate_numbers"
+name = "p293_pseudo_fortunate_numbers"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

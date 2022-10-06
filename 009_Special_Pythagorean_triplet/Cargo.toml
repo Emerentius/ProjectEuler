@@ -1,5 +1,5 @@
 [package]
 
-name = "009_Special_Pythagorean_triplet"
+name = "p009_special_pythagorean_triplet"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

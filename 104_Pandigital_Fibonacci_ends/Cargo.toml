@@ -1,4 +1,4 @@
 [package]
-name = "104_Pandigital_Fibonacci_ends"
+name = "p104_pandigital_fibonacci_ends"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

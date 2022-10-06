@@ -1,6 +1,6 @@
 [package]
 
-name = "038_Pandigital_multiples"
+name = "p038_pandigital_multiples"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

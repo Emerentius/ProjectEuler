@@ -1,5 +1,5 @@
 [package]
-name = "231_binom_coeffs_prime_factors"
+name = "p231_binom_coeffs_prime_factors"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

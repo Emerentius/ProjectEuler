@@ -1,5 +1,5 @@
 [package]
 
-name = "034_Digit_factorials"
+name = "p034_digit_factorials"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

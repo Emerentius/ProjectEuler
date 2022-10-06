@@ -1,6 +1,6 @@
 [package]
 
-name = "123_Prime_square_remainders"
+name = "p123_prime_square_remainders"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

@@ -1,5 +1,5 @@
 [package]
-name = "155_counting_capacitor_circuits"
+name = "p155_counting_capacitor_circuits"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

@@ -1,4 +1,4 @@
 [package]
-name = "079_Passcode_derivation"
+name = "p079_passcode_derivation"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]

@@ -1,5 +1,5 @@
 [package]
-name = "204_Generalised_Hamming_Numbers"
+name = "p204_generalised_hamming_numbers"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

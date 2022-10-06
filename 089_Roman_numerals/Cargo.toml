@@ -1,4 +1,4 @@
 [package]
-name = "089_Roman_numerals"
+name = "p089_roman_numerals"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]

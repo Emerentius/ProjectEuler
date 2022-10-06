@@ -1,5 +1,5 @@
 [package]
 
-name = "011_Largest_product_in_a_grid"
+name = "p011_largest_product_in_a_grid"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

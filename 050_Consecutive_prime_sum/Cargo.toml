@@ -1,6 +1,6 @@
 [package]
 
-name = "050_Consecutive_prime_sum"
+name = "p050_consecutive_prime_sum"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

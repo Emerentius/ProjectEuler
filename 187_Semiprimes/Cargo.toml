@@ -1,6 +1,6 @@
 [package]
 
-name = "187_Semiprimes"
+name = "p187_semiprimes"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

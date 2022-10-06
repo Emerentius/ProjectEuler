@@ -1,5 +1,5 @@
 [package]
-name = "577_counting_hexagons"
+name = "p577_counting_hexagons"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

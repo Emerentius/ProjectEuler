@@ -1,6 +1,6 @@
 [package]
 
-name = "060_Prime_pair_sets"
+name = "p060_prime_pair_sets"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

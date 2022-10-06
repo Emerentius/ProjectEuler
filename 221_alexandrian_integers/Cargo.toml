@@ -1,5 +1,5 @@
 [package]
-name = "221_alexandrian_integers"
+name = "p221_alexandrian_integers"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

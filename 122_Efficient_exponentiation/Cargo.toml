@@ -1,4 +1,4 @@
 [package]
-name = "122_Efficient_exponentiation"
+name = "p122_efficient_exponentiation"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

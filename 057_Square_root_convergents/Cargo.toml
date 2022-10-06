@@ -1,6 +1,6 @@
 [package]
 
-name = "057_Square_root_convergents"
+name = "p057_square_root_convergents"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

@@ -1,5 +1,5 @@
 [package]
 
-name = "102_triangle_containment"
+name = "p102_triangle_containment"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

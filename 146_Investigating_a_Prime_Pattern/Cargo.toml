@@ -1,6 +1,6 @@
 [package]
 
-name = "146_Investigating_a_Prime_Pattern"
+name = "p146_investigating_a_prime_pattern"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

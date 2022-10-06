@@ -1,5 +1,5 @@
 [package]
 
-name = "097_Large_non_Mersenne_prime"
+name = "p097_large_non_mersenne_prime"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

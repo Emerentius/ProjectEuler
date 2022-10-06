@@ -1,6 +1,6 @@
 [package]
 
-name = "041_Pandigital_prime"
+name = "p041_pandigital_prime"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

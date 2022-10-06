@@ -1,6 +1,6 @@
 [package]
 
-name = "049_Prime_permutations"
+name = "p049_prime_permutations"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

@@ -1,5 +1,5 @@
 [package]
 
-name = "021_Amicable_numbers"
+name = "p021_amicable_numbers"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

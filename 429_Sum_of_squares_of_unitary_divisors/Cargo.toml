@@ -1,5 +1,5 @@
 [package]
-name = "429_Sum_of_squares_of_unitary_divisors"
+name = "p429_sum_of_squares_of_unitary_divisors"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

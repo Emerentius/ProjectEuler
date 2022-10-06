@@ -1,5 +1,5 @@
 [package]
-name = "225_tribonacci_non-divisors"
+name = "p225_tribonacci_non-divisors"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

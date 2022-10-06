@@ -1,6 +1,6 @@
 [package]
 
-name = "055_Lychrel_numbers"
+name = "p055_lychrel_numbers"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

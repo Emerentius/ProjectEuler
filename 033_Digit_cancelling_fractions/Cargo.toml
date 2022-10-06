@@ -1,5 +1,5 @@
 [package]
 
-name = "033_Digit_cancelling_fractions"
+name = "p033_digit_cancelling_fractions"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]

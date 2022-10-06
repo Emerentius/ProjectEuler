@@ -1,6 +1,6 @@
 [package]
 
-name = "035_Circular_primes"
+name = "p035_circular_primes"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

@@ -1,5 +1,5 @@
 [package]
-name = "381_prime_min_k_factorial"
+name = "p381_prime_min_k_factorial"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 

@@ -1,6 +1,6 @@
 [package]
 
-name = "010_Summation_of_primes"
+name = "p010_summation_of_primes"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
