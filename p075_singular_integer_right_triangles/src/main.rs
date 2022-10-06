@@ -1,5 +1,4 @@
 #![feature(test)]
-#![feature(iterator_step_by)]
 extern crate test;
 extern crate num;
 use num::integer::Integer;

@@ -1,10 +1,7 @@
 #![feature(test)]
 extern crate test;
 
-extern crate num;
 extern crate core;
-//use num::{BigUint, One, Zero};
-//use num::bigint::ToBigUint;
 
 fn reverse( num : u128 ) -> u128 {
 	let mut num = num.clone();

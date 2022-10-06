@@ -3,5 +3,5 @@ name = "p075_singular_integer_right_triangles"
 version = "0.0.1"
 authors = ["Emerentius <Emerentius@arcor.de>"]
 
-[dependencies.num]
-version = "0.1.42"
+[dependencies]
+num= "0.4.0"
