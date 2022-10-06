@@ -245,16 +245,6 @@ pub fn is_prime_trial_div (number : u64, primes : &[u64]) -> bool {
 	true
 }
 
-fn pow_mod(mut number:u64, mut power:u32, modu:u64) -> u64 {
-	let mut result = 1;
-	while power != 0 {
-		if power % 2 != 0 { result = (result*number) % modu }
-		number = (number*number) % modu;
-		power /= 2;
-	}
-	result
-}
-
 /// Primality test by Miller-Rabin.
 /// Deterministic for u64
 /// but may panic for number > 2^32
@@ -284,7 +274,7 @@ pub fn is_prime (number : u64) -> bool {
 
 	'base: for &base in &bases {
 		if base >= number { break }
-		let mut num = pow_mod(base, d, number);
+		let mut num = crate::num::pow_mod(base, d, number);
 		// possibly prime
 		if num == 1 || num == number_min { continue 'base}
 		for _ in 0..j {

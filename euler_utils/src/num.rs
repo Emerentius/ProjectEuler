@@ -56,6 +56,27 @@ pub fn multiplicative_inverse(a: i64, n: i64) -> Option<i64> {
 //    (d, t, s - (a % b)*t)
 //}
 
+pub fn pow_mod(mut number:u64, mut power:u32, modu:u64) -> u64 {
+	let mut result = 1;
+	while power != 0 {
+		if power % 2 != 0 { result = (result*number) % modu }
+		number = (number*number) % modu;
+		power /= 2;
+	}
+	result
+}
+
+#[test]
+fn test_pow_mod() {
+    for num in 1..10u64 {
+        for pow in 1..15 {
+            for modulo in 1..1000 {
+                assert_eq!(num.pow(pow) % modulo, pow_mod(num, pow, modulo));
+            }
+        }
+    }
+}
+
 pub trait IntSqrt
     where Self: Sized
 {
