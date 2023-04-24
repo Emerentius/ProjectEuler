@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 import numpy as np
-import random
 
 roll_transitions = np.zeros((40, 40))
 
 
-def event_transitions():
+def event_transitions_():
     #####################################
     COMMUNITY_CHEST = [2, 17, 33]
     CHANCE = [7, 22, 36]
@@ -38,7 +37,7 @@ def event_transitions():
         # sent away by chance
         r = NEXT_R[ch]
         for target in [GO, JAIL, C1, E3, H2, R1, r, r, NEXT_U[ch], ch - 3]:
-            event_transitions[0, ch] = 1 / 16
+            event_transitions[target, ch] = 1 / 16
 
     # Go 2 Jail
     event_transitions[10, G2J] = 1
@@ -47,7 +46,7 @@ def event_transitions():
     return event_transitions
 
 
-event_transitions = event_transitions()
+event_transitions = event_transitions_()
 
 
 # three doubles
@@ -63,7 +62,7 @@ for col in range(40):
 
 # 0 and 1..=12
 # n_dice = 2 # hardcoded with 2 for loops. Make recursive or cleverer (binomial) for more
-n_sides = 6
+n_sides = 4
 length = 2 * n_sides + 1
 counts = [0] * length
 for roll1 in range(1, n_sides + 1):
