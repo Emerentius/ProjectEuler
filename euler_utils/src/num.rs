@@ -89,6 +89,7 @@ where
 {
     fn isqrt(self) -> Self;
     fn sqrt(self) -> Option<Self>;
+    #[allow(clippy::wrong_self_convention)]
     fn is_square(self) -> bool;
 }
 

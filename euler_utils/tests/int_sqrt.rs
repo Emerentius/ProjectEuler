@@ -44,7 +44,7 @@ fn squareness_check() {
     for &n_sq in &squares {
         assert!(n_sq.is_square());
     }
-    for n_non_sq in (1..1_000_000).filter(|n| squares.binary_search(&n).is_err()) {
+    for n_non_sq in (1..1_000_000).filter(|n| squares.binary_search(n).is_err()) {
         assert!(!n_non_sq.is_square());
     }
 }

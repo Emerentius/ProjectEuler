@@ -34,7 +34,7 @@ impl<T: Ord + Copy> PermutationsStreamIter<T> {
                 let swappee1 = slice[i];
                 let min_greater: Option<(usize, T)>;
                 {
-                    min_greater = (&slice[i..])
+                    min_greater = slice[i..]
                         .iter()
                         .cloned()
                         .enumerate()
@@ -45,7 +45,7 @@ impl<T: Ord + Copy> PermutationsStreamIter<T> {
                 if let Some((idx_offset, _)) = min_greater {
                     slice[i] = slice[i + idx_offset];
                     slice[i + idx_offset] = swappee1;
-                    (&mut slice[i + 1..]).reverse();
+                    slice[i + 1..].reverse();
                 }
                 return Some(slice);
             }
@@ -70,7 +70,7 @@ impl<T: Ord + Copy> PartialPermutationsStreamIter<T> {
         }
         PartialPermutationsStreamIter {
             first: true,
-            k: k,
+            k,
             data: data.as_ref().to_vec(),
         }
     }
@@ -98,7 +98,7 @@ impl<T: Ord + Copy> PartialPermutationsStreamIter<T> {
         let swappee_edge1 = slice[n];
         let min_greater_edge: Option<(usize, T)>;
         {
-            min_greater_edge = (&slice[n..])
+            min_greater_edge = slice[n..]
                 .iter()
                 .cloned()
                 .enumerate()
@@ -112,7 +112,7 @@ impl<T: Ord + Copy> PartialPermutationsStreamIter<T> {
             slice[n + idx_offset] = swappee_edge1;
             return Some(&slice[..self.k]);
         } else {
-            (&mut slice[n + 1..]).reverse();
+            slice[n + 1..].reverse();
         }
 
         // edge not at cutoff
@@ -122,7 +122,7 @@ impl<T: Ord + Copy> PartialPermutationsStreamIter<T> {
                 let swappee1 = slice[i];
                 let min_greater: Option<(usize, T)>;
                 {
-                    min_greater = (&slice[i..])
+                    min_greater = slice[i..]
                         .iter()
                         .cloned()
                         .enumerate()
@@ -133,7 +133,7 @@ impl<T: Ord + Copy> PartialPermutationsStreamIter<T> {
                 if let Some((idx_offset, _)) = min_greater {
                     slice[i] = slice[i + idx_offset];
                     slice[i + idx_offset] = swappee1;
-                    (&mut slice[i + 1..]).reverse();
+                    slice[i + 1..].reverse();
                 }
                 return Some(&slice[..self.k]);
             }

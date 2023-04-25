@@ -8,7 +8,7 @@ pub struct IsPrime {
 
 impl Index<usize> for IsPrime {
     type Output = bool;
-    fn index<'a>(&'a self, index: usize) -> &'a (Self::Output) {
+    fn index(&self, index: usize) -> &Self::Output {
         match index {
             2 => &self.is_prime[1], // = is_prime(3) = true, only even prime
             _ if index % 2 == 0 => &self.is_prime[0], // = is_prime(1) = false, all evens
@@ -302,14 +302,14 @@ pub fn is_prime(number: u64) -> bool {
     }
 
     let bases = match number {
-        0...1_373_652 => vec![2, 3],
-        1_373_653...2_152_302_898_746 => vec![2, 3, 5, 7, 11],
+        0..=1_373_652 => vec![2, 3],
+        1_373_653..=2_152_302_898_746 => vec![2, 3, 5, 7, 11],
         _ => vec![2, 325, 9_375, 28_178, 450_775, 9_780_504, 1_795_265_022],
     };
     let number_min = number - 1;
     let j = (number_min).trailing_zeros();
     let d_u64 = (number_min) >> j; // same as (number - 1)/ 2^j
-    let d = if d_u64 > (!0 as u32) as u64 {
+    let d = if d_u64 > u32::MAX as u64 {
         panic!("uneven factor of (number - 1) larger than 2^32 - 1 , arithmetic overflow")
     } else {
         d_u64 as u32
@@ -394,10 +394,10 @@ impl Phi {
                 }
             }
         }
-        Phi { totients: totients }
+        Phi { totients }
     }
 
-    pub fn iter<'a>(&'a self) -> PhiIter<'a> {
+    pub fn iter(&self) -> PhiIter<'_> {
         self.totients.iter().skip(1)
     }
 }
@@ -435,10 +435,10 @@ impl Phi32 {
                 }
             }
         }
-        Phi32 { totients: totients }
+        Phi32 { totients }
     }
 
-    pub fn iter<'a>(&'a self) -> Phi32Iter<'a> {
+    pub fn iter(&self) -> Phi32Iter<'_> {
         self.totients.iter().skip(1)
     }
 }
