@@ -2,3 +2,8 @@
 name = "p108_diophantine_reciprocals"
 version = "0.1.0"
 authors = ["Emerentius <Emerentius@arcor.de>"]
+edition = "2021"
+
+[dependencies]
+primal = "0.3.2"
+euler_utils = { path = "../euler_utils" }

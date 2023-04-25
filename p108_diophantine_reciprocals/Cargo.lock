@@ -3,5 +3,106 @@
 version = 3
 
 [[package]]
+name = "autocfg"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
+
+[[package]]
+name = "bit-vec"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f59bbe95d4e52a6398ec21238d31577f2b28a9d86807f06ca59d191d8440d0bb"
+
+[[package]]
+name = "euler_utils"
+version = "0.1.0"
+dependencies = [
+ "bit-vec",
+ "primal",
+]
+
+[[package]]
+name = "hamming"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "65043da274378d68241eb9a8f8f8aa54e349136f7b8e12f63e3ef44043cc30e1"
+
+[[package]]
+name = "num-integer"
+version = "0.1.45"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "225d3389fb3509a24c93f5c29eb6bde2586b98d9f016636dff58d7c6f7569cd9"
+dependencies = [
+ "autocfg",
+ "num-traits",
+]
+
+[[package]]
+name = "num-traits"
+version = "0.2.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "578ede34cf02f8924ab9447f50c28075b4d3e5b269972345e7e0372b38c6cdcd"
+dependencies = [
+ "autocfg",
+]
+
+[[package]]
 name = "p108_diophantine_reciprocals"
 version = "0.1.0"
+dependencies = [
+ "euler_utils",
+ "primal",
+]
+
+[[package]]
+name = "primal"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4b53cc99c892c461727618e8a63806c94b09ae13c494dc5fc70a7557b3a2f071"
+dependencies = [
+ "primal-check",
+ "primal-estimate",
+ "primal-sieve",
+]
+
+[[package]]
+name = "primal-bit"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6ce4fe11b2a87850ca3bd5dc9c7cb9f66e32a09edab221be406ac5ff677f2241"
+dependencies = [
+ "hamming",
+]
+
+[[package]]
+name = "primal-check"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9df7f93fd637f083201473dab4fee2db4c429d32e55e3299980ab3957ab916a0"
+dependencies = [
+ "num-integer",
+]
+
+[[package]]
+name = "primal-estimate"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7374f14c76f23e1271e6be806981ac5dd9e52b59132b0a2f10bcc412495f9159"
+
+[[package]]
+name = "primal-sieve"
+version = "0.3.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9f2a14766f8c543620824b5b2cec356abf2681b76966a7ac4b4ed2c0011e696a"
+dependencies = [
+ "primal-bit",
+ "primal-estimate",
+ "smallvec",
+]
+
+[[package]]
+name = "smallvec"
+version = "1.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a507befe795404456341dfab10cef66ead4c041f62b8b11bbb92bffe5d0953e0"
