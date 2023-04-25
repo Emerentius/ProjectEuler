@@ -1,7 +1,7 @@
 #![feature(test)]
 
-extern crate test;
 extern crate euler_utils;
+extern crate test;
 use euler_utils::prime;
 
 #[bench]
@@ -20,7 +20,7 @@ fn atkin_sieve(b: &mut test::Bencher) {
 }
 
 #[bench]
-fn trial_division_with_primes (b: &mut test::Bencher) {
+fn trial_division_with_primes(b: &mut test::Bencher) {
     let max = 100_000;
     let primes = prime::sieve(max);
     b.iter(|| {
@@ -34,7 +34,7 @@ fn trial_division_with_primes (b: &mut test::Bencher) {
 }
 
 #[bench]
-fn trial_division_without_primes (b: &mut test::Bencher) {
+fn trial_division_without_primes(b: &mut test::Bencher) {
     b.iter(|| {
         let mut is_prime = [true; 500_000];
         is_prime[0] = false;
@@ -46,7 +46,7 @@ fn trial_division_without_primes (b: &mut test::Bencher) {
 }
 
 #[bench]
-fn miller_rabin_primality_test (b: &mut test::Bencher) {
+fn miller_rabin_primality_test(b: &mut test::Bencher) {
     b.iter(|| {
         let mut is_prime = [true; 500_000];
         is_prime[0] = false;

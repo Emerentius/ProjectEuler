@@ -45,8 +45,12 @@ pub fn multiplicative_inverse(a: i64, n: i64) -> Option<i64> {
         //old_t = t;
         //t = new_temp;
     }
-    if old_r > 1 { return None } // not invertible
-    if old_s < 0 { old_s += n } // positive number
+    if old_r > 1 {
+        return None;
+    } // not invertible
+    if old_s < 0 {
+        old_s += n
+    } // positive number
     Some(old_s)
 }
 
@@ -56,14 +60,16 @@ pub fn multiplicative_inverse(a: i64, n: i64) -> Option<i64> {
 //    (d, t, s - (a % b)*t)
 //}
 
-pub fn pow_mod(mut number:u64, mut power:u32, modu:u64) -> u64 {
-	let mut result = 1;
-	while power != 0 {
-		if power % 2 != 0 { result = (result*number) % modu }
-		number = (number*number) % modu;
-		power /= 2;
-	}
-	result
+pub fn pow_mod(mut number: u64, mut power: u32, modu: u64) -> u64 {
+    let mut result = 1;
+    while power != 0 {
+        if power % 2 != 0 {
+            result = (result * number) % modu
+        }
+        number = (number * number) % modu;
+        power /= 2;
+    }
+    result
 }
 
 #[test]
@@ -78,7 +84,8 @@ fn test_pow_mod() {
 }
 
 pub trait IntSqrt
-    where Self: Sized
+where
+    Self: Sized,
 {
     fn isqrt(self) -> Self;
     fn sqrt(self) -> Option<Self>;
@@ -110,11 +117,11 @@ macro_rules! implement_int_sqrt {
                 match self % 16 {
                     0 | 1 | 4 | 9 => {
                         let root = self.isqrt();
-                        match root*root == self {
+                        match root * root == self {
                             true => Some(root),
                             false => None,
                         }
-                    },
+                    }
                     _ => None,
                 }
             }
@@ -137,7 +144,7 @@ implement_int_sqrt!(usize);
 #[test]
 fn squares() {
     for i in 0u8..16 {
-        let ii = i*i;
+        let ii = i * i;
         assert!((ii).is_square());
         assert!(ii.isqrt() == i);
         assert!(ii.sqrt().unwrap() == ii.isqrt());
@@ -172,7 +179,7 @@ fn squares() {
 #[test]
 fn nonsquares_plus_one() {
     for i in 1u8..16 {
-        let ii = i*i + 1;
+        let ii = i * i + 1;
         assert!(!(ii).is_square());
         assert!(ii.isqrt() == i);
         assert!(ii.sqrt().is_none());
@@ -207,7 +214,7 @@ fn nonsquares_plus_one() {
 #[test]
 fn nonsquares_minus_one() {
     for i in 2u8..16 {
-        let ii = i*i - 1;
+        let ii = i * i - 1;
         assert!(!(ii).is_square());
         assert!(ii.isqrt() == i - 1);
         assert!(ii.sqrt().is_none());
