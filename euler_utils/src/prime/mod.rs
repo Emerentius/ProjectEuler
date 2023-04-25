@@ -1,6 +1,32 @@
 extern crate bit_vec;
+extern crate primal;
 use self::bit_vec::BitVec;
 use std::ops::Index;
+
+pub trait DivisorExt {
+    fn n_divisors(&self, num: usize) -> Option<usize>;
+
+    /// Number of divisors of `num.pow(exp)`
+    fn n_divisors_pow(&self, num: usize, exp: usize) -> Option<usize>;
+}
+
+impl DivisorExt for primal::Sieve {
+    fn n_divisors(&self, num: usize) -> Option<usize> {
+        self.factor(num).ok().map(|factors| {
+            factors
+                .into_iter()
+                .fold(1, |prod, (_, occ)| prod * (occ + 1))
+        })
+    }
+
+    fn n_divisors_pow(&self, num: usize, exp: usize) -> Option<usize> {
+        self.factor(num).ok().map(|factors| {
+            factors
+                .into_iter()
+                .fold(1, |prod, (_, occ)| prod * (occ * exp + 1))
+        })
+    }
+}
 
 pub struct IsPrime {
     is_prime: BitVec,
