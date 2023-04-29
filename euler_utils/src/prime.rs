@@ -401,43 +401,42 @@ impl Iterator for FareySequence {
     }
 }
 
-// maybe switch to cell?
-/// A struct to save the totients for all numbers up to a given maximum
-pub struct Phi {
-    totients: Vec<usize>,
-}
+// // maybe switch to cell?
+// /// A struct to save the totients for all numbers up to a given maximum
+// pub struct Phi {
+//     totients: Vec<usize>,
+// }
 
-pub type PhiIter<'a> = std::iter::Skip<std::slice::Iter<'a, usize>>;
+// pub type PhiIter<'a> = std::iter::Skip<std::slice::Iter<'a, usize>>;
 
-impl Phi {
-    pub fn new(max: usize) -> Phi {
-        // TODO: inclusive range
-        let mut totients: Vec<_> = (0..max + 1).collect();
-        for i in 2..max + 1 {
-            if totients[i] == i {
-                for n in (i..max + 1).step_by(i) {
-                    totients[n] -= totients[n] / i;
-                }
-            }
-        }
-        Phi { totients }
-    }
+// impl Phi {
+//     pub fn new(max: usize) -> Phi {
+//         let mut totients: Vec<_> = (0..max + 1).collect();
+//         for i in 2..max + 1 {
+//             if totients[i] == i {
+//                 for n in (i..max + 1).step_by(i) {
+//                     totients[n] -= totients[n] / i;
+//                 }
+//             }
+//         }
+//         Phi { totients }
+//     }
 
-    pub fn iter(&self) -> PhiIter<'_> {
-        self.totients.iter().skip(1)
-    }
-}
+//     pub fn iter(&self) -> PhiIter<'_> {
+//         self.totients.iter().skip(1)
+//     }
+// }
 
-impl Index<usize> for Phi {
-    type Output = usize;
+// impl Index<usize> for Phi {
+//     type Output = usize;
 
-    fn index(&self, idx: usize) -> &Self::Output {
-        if idx == 0 {
-            panic!("Totients are only defined for positive integers")
-        }
-        &self.totients[idx]
-    }
-}
+//     fn index(&self, idx: usize) -> &Self::Output {
+//         if idx == 0 {
+//             panic!("Totients are only defined for positive integers")
+//         }
+//         &self.totients[idx]
+//     }
+// }
 
 // maybe switch to cell?
 /// A struct to save the totients for all numbers up to a given maximum
