@@ -6,4 +6,5 @@ edition = "2021"
 
 [dependencies]
 bit-vec = "0.5.0"
+num = "0.4.0"
 primal = "0.3.2"

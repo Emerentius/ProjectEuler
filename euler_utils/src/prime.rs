@@ -1,6 +1,8 @@
 extern crate bit_vec;
 extern crate primal;
 
+use num::Integer;
+
 use crate::num::IntSqrt;
 
 use self::bit_vec::BitVec;
@@ -525,6 +527,80 @@ impl Index<u32> for Phi32 {
         }
         &self.totients[idx as usize]
     }
+}
+
+/// EXPERIMENTAL
+/// This implementation is based on an approach for which I had a hunch,
+/// that it would be correct, but I haven't rigorously proven it.
+///
+/// A struct to save the reduced totients for all numbers up to a given maximum
+pub struct CarMichael {
+    reduced_totients: Vec<u32>,
+}
+
+pub type CarMichaelIter<'a> = std::iter::Skip<std::slice::Iter<'a, u32>>;
+
+impl CarMichael {
+    pub fn new(max: u32) -> CarMichael {
+        let mut reduced_totients: Vec<_> = (0..max + 1).collect();
+        for i in 2..max + 1 {
+            // The carmichael function λ(n) has the property that
+            // λ(n) = lcm(λ(p1^k), λ(p2^l), …)
+            // and λ(p^k) = φ(p^k) except for powers of 2 greater than 2 (2^3 and up).
+            //
+            // The sieve here is very similar to the one for phi.
+            // TODO: describe approach
+            // TODO: verify approach
+            if reduced_totients[i as usize] == i {
+                for n in (i..max + 1).step_by(i as usize) {
+                    let mult = multiplicity(i, n);
+                    let n = n as usize;
+                    assert!(reduced_totients[n] % i == 0);
+                    let carmichael_divisor = if i == 2 && mult >= 3 { 2 } else { 1 };
+                    reduced_totients[n] =
+                        (reduced_totients[n] / i / carmichael_divisor).lcm(&(i - 1));
+                }
+            }
+        }
+        CarMichael { reduced_totients }
+    }
+
+    pub fn iter(&self) -> CarMichaelIter<'_> {
+        self.reduced_totients.iter().skip(1)
+    }
+}
+
+fn multiplicity(i: u32, mut n: u32) -> u32 {
+    let mut occ = 0;
+    while n % i == 0 {
+        occ += 1;
+        n /= i;
+    }
+    occ
+}
+
+impl Index<u32> for CarMichael {
+    type Output = u32;
+
+    fn index(&self, idx: u32) -> &Self::Output {
+        if idx == 0 {
+            panic!("Reduced totients are only defined for positive integers")
+        }
+        &self.reduced_totients[idx as usize]
+    }
+}
+
+#[test]
+fn test_carmichael() {
+    let lambda = CarMichael::new(81);
+    let lambda = lambda.iter().copied().collect::<Vec<_>>();
+    let expected_lambda = vec![
+        1, 1, 2, 2, 4, 2, 6, 2, 6, 4, 10, 2, 12, 6, 4, 4, 16, 6, 18, 4, 6, 10, 22, 2, 20, 12, 18,
+        6, 28, 4, 30, 8, 10, 16, 12, 6, 36, 18, 12, 4, 40, 6, 42, 10, 12, 22, 46, 4, 42, 20, 16,
+        12, 52, 18, 20, 6, 18, 28, 58, 4, 60, 30, 6, 16, 12, 10, 66, 16, 22, 12, 70, 6, 72, 36, 20,
+        18, 30, 12, 78, 4, 54,
+    ];
+    assert_eq!(lambda, expected_lambda);
 }
 
 #[test]
