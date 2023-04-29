@@ -449,9 +449,15 @@ pub type Phi32Iter<'a> = std::iter::Skip<std::slice::Iter<'a, u32>>;
 
 impl Phi32 {
     pub fn new(max: u32) -> Phi32 {
-        // TODO: inclusive range
         let mut totients: Vec<_> = (0..max + 1).collect();
         for i in 2..max + 1 {
+            // φ is multiplicative, so φ(n) = φ(p1^k * p2^l...) = φ(p1^k) * φ(p2^l) … .
+            // for p prime, φ(p^k) = p^k * (1 - 1/p)
+            // iterate through all primes p and subtract the previous value of totient[n]
+            // from totient[n] for all n that are multiples of p.
+            // That's equivalent to multiplying with (1 - 1/p)
+            //
+            // if nothing prior has reduced totients[i], then i is prime
             if totients[i as usize] == i {
                 for n in (i..max + 1).step_by(i as usize) {
                     let n = n as usize;
@@ -477,4 +483,15 @@ impl Index<u32> for Phi32 {
         }
         &self.totients[idx as usize]
     }
+}
+
+#[test]
+fn test_totients() {
+    let phi = Phi32::new(36);
+    let phi = phi.iter().copied().collect::<Vec<_>>();
+    let expected_phi = vec![
+        1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16, 6, 18, 8, 12, 10, 22, 8, 20, 12, 18,
+        12, 28, 8, 30, 16, 20, 16, 24, 12,
+    ];
+    assert_eq!(phi, expected_phi);
 }
