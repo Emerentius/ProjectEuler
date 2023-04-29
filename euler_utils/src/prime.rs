@@ -1,5 +1,8 @@
 extern crate bit_vec;
 extern crate primal;
+
+use crate::num::IntSqrt;
+
 use self::bit_vec::BitVec;
 use std::ops::Index;
 
@@ -8,6 +11,8 @@ pub trait DivisorExt {
 
     /// Number of divisors of `num.pow(exp)`
     fn n_divisors_pow(&self, num: usize, exp: usize) -> Option<usize>;
+
+    fn divisors(&self, num: usize) -> Option<Vec<usize>>;
 }
 
 impl DivisorExt for primal::Sieve {
@@ -25,6 +30,43 @@ impl DivisorExt for primal::Sieve {
                 .into_iter()
                 .fold(1, |prod, (_, occ)| prod * (occ * exp + 1))
         })
+    }
+
+    fn divisors(&self, num: usize) -> Option<Vec<usize>> {
+        let Ok(factors) = self.factor(num) else { return None };
+        let mut divisors = if num == 1 { vec![1] } else { vec![1, num] };
+        visit_divisors(num, num.isqrt(), &factors, 1, &mut divisors);
+        divisors.sort();
+        Some(divisors)
+    }
+}
+
+fn visit_divisors(
+    num: usize,
+    num_isqrt: usize,
+    factors: &[(usize, usize)],
+    current_div: usize,
+    divisors: &mut Vec<usize>,
+) {
+    if let Some((&(prime, multiplicity), rest)) = factors.split_first() {
+        let mut next_div = current_div;
+
+        visit_divisors(num, num_isqrt, rest, next_div, divisors);
+
+        for _ in 0..multiplicity {
+            next_div *= prime;
+
+            if next_div > num_isqrt {
+                break;
+            }
+
+            divisors.push(next_div);
+            let paired_div = num / next_div;
+            if paired_div != next_div {
+                divisors.push(paired_div);
+            }
+            visit_divisors(num, num_isqrt, rest, next_div, divisors);
+        }
     }
 }
 
@@ -317,7 +359,7 @@ pub fn is_prime(number: u64) -> bool {
 
     // some trial divisions to find most non-primes already
     // create helper function later
-    let trial_primes = [2, 3, 5, 7, 11, 13, 17, 19]; //23,29,31,37,41,43,47,53,59,61,67,71,	     	73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163];
+    let trial_primes = [2, 3, 5, 7, 11, 13, 17, 19]; //23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163];
     for &prime in trial_primes.iter() {
         if number % prime == 0 {
             if number == prime {
@@ -494,4 +536,17 @@ fn test_totients() {
         12, 28, 8, 30, 16, 20, 16, 24, 12,
     ];
     assert_eq!(phi, expected_phi);
+}
+
+#[test]
+fn test_divisors() {
+    let sieve = primal::Sieve::new(1000);
+
+    fn naive_divisors(num: usize) -> Vec<usize> {
+        (1..num + 1).filter(|d| num % d == 0).collect()
+    }
+
+    for n in 1..1_000 {
+        assert_eq!(sieve.divisors(n).unwrap(), naive_divisors(n));
+    }
 }
