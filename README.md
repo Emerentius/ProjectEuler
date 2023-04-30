@@ -1,6 +1,6 @@
 # Project Euler
 
-![Project Euler Progress](https://projecteuler.net/profile/Emerentius.png)
+![Project Euler Progress](https://projecteuler.net/profile/emerent.png)
 
 These are my solutions for the popular mathematical programming puzzle site [Project Euler](http://projecteuler.net/). Most solutions are in Rust, some are in Python, mainly for the BigInts and matrices.
 
