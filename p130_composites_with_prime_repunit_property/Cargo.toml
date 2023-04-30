@@ -1,0 +1,13 @@
+[package]
+name = "p130_composites_with_prime_repunit_property"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+num = "0.4.0"
+primal = "0.3.2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies.euler_utils]
+path = "../euler_utils"
