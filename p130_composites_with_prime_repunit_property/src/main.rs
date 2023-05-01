@@ -16,7 +16,7 @@ fn main() {
             let totient = totients[(9 * n) as u32];
 
             let a_of_n = primes
-                .divisors(9 * totient as usize)
+                .divisors(totient as usize)
                 .unwrap()
                 .into_iter()
                 .find(|&k| pow_mod(10, k as u32, (9 * n) as u64) == 1)
