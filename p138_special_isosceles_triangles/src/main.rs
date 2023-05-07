@@ -23,7 +23,7 @@ fn main() {
         let diff = h - b;
 
         if diff.abs() == 1 {
-            let l = m * n + n * n;
+            let l = m * m + n * n;
             println!("{count}: {b}, {h}, {l}");
             count += 1;
             m *= 4;
@@ -34,7 +34,7 @@ fn main() {
         } else {
             n += 1;
         }
-        if count == 18 {
+        if count == 12 {
             break;
         }
     }
