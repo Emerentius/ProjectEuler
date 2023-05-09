@@ -1,33 +1,51 @@
+use num::Integer;
+
 fn main() {
     let mut sum = 0;
-    for n_root in 2..1_000_000u64 {
-        let n = n_root * n_root;
-        // testing divisors greater than √n is pointless as we would get the same
-        // tuple of (n,d,q), just in a different order.
-        //
-        // divisor < quotient
-        // rest < divisor
-        // rest < quotient
-        // => rest < divisor < quotient
-        for divisor in 2..n_root {
-            let quotient = n / divisor;
-            let rest = n % divisor;
-            if rest == 0 {
+    let limit = 1_000_000_000_000;
+    // When looking at divisors less than √n
+    // rest < divisor < quotient
+    //
+    // r = r          = k b² (as r must be divisible by b² for q to be an integer)
+    // d = r a/b    = k a b
+    // q = r a²/b²  = k a²
+    //
+    // n = r + d q
+    //   = k b² + (k a b) (k a²)
+    //   = k b (b + k a³)
+    // => a^3 <= limit
+    for a in 2..10_000u64 {
+        // b < a, so ratio is > 1
+        for b in 1..a {
+            // optimization only
+            if a * a * a * b >= limit {
+                break;
+            }
+
+            if a.gcd(&b) != 1 {
                 continue;
             }
 
-            debug_assert!(divisor > rest);
-            debug_assert!(quotient > divisor);
-            // a_(k+1) = a_k * r
-            // r = a_(1+1) / a_1 = a_(1+2) / a_(1+1)
-            // <=> (a_2)^2 = a_1 * a_3
-            if rest * quotient == divisor * divisor {
-                println!(
-                    "{n} √n={n_root} r={} d={divisor} q={quotient}",
-                    num::rational::Ratio::new(divisor, rest)
-                );
-                sum += n;
-                break;
+            for k in 1.. {
+                let n = k * b * (b + a * a * a * k);
+                if n >= limit {
+                    break;
+                }
+                let quotient = k * a * a;
+                let rest = b * b * k;
+                let divisor = k * a * b;
+
+                debug_assert!(divisor > rest);
+                debug_assert!(quotient > divisor);
+
+                let sqrt = (n as f64).sqrt() as u64;
+                if sqrt * sqrt == n {
+                    println!(
+                        "{n} √n={sqrt} a/b={} rest={rest} d={divisor} q={quotient} a={a} b={b} k={k}",
+                        num::rational::Ratio::new(divisor, rest)
+                    );
+                    sum += n;
+                }
             }
         }
     }
