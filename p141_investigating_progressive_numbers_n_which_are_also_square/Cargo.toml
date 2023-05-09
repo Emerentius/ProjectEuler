@@ -1,0 +1,9 @@
+[package]
+name = "p141_investigating_progressive_numbers_n_which_are_also_square"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+num = "0.4.0"
