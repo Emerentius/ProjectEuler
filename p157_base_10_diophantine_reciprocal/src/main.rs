@@ -5,7 +5,8 @@ use std::cmp::Ordering::{Equal, Greater, Less};
 fn main() {
     let primes = primal::Sieve::new(100_000);
     let mut total_solution = 0u128;
-    for n in 1..=1i16 {
+    for n in 1..=9i16 {
+        let mut n_solution = 0;
         for x in -n..=n {
             let min_y = (-x as f64 * 2.0f64.log(5.0)).floor() as i16;
             //let min_y = n;
@@ -86,7 +87,7 @@ fn main() {
                     .product();
                 println!("factor1={factor1} n={n}, x={x}, y={y}, n_sols={n_combinations}");
 
-                total_solution += n_combinations as u128;
+                n_solution += n_combinations as u128;
 
                 // for u in 0..=n {
                 //     for v in 0..=n {
@@ -98,6 +99,16 @@ fn main() {
                 // }
             }
         }
+
+        // n_total = 2*S + U,   S number of solutions where a and b could be swapped for another solution, a < b
+        //                      U number of solutions where a == b
+        // => S = (n_total - U) / 2
+        // => non_double_counted_solutions = S + U = (n_total + U) / 2
+        let u = (n as u128 + 2) * (n as u128 + 1);
+        let n_solutions_non_double_counted = (n_solution + u) / 2;
+
+        total_solution += n_solutions_non_double_counted;
+        println!("n: {n}, solutions: {n_solution}");
     }
     println!("{total_solution}");
 }
