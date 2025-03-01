@@ -1,0 +1,8 @@
+[package]
+name = "p250_250250"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+euler_utils = { version = "0.1.0", path = "../euler_utils" }
+itertools = "0.14.0"
